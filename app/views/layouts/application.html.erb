@@ -208,6 +208,7 @@ display: none;
           <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario etinerante') %>
            <li class="top"><a href="#nogo2" id="etinerancia" class="top_link"><span class="down">Etinerância</span></a>
             <ul class="sub">
+
               <li><a href="#nogo29" class="fly">Relatórios</a>
                   <ul>
                      <li><%= link_to "Cadastrar",new_relatorio_path %></li>
@@ -216,6 +217,16 @@ display: none;
                      <%end%>
                   </ul>
                </li>
+              <li><a href="#nogo29" class="fly">Roteiro</a>
+                  <ul>
+                     <li><%= link_to "Cadastrar",new_itinerario_path %></li>
+                     <% if current_user.has_role?('administrador') %>
+                        <li><%= link_to "Consultar", itinerarios_path%></li>
+                     <%end%>
+                  </ul>
+               </li>
+
+
               <li><%= link_to 'Roteiro' %></li>
             </ul>
            </li>
