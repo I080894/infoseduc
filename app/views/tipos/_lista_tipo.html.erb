@@ -1,0 +1,15 @@
+<br/>
+<font size="3">
+<table  width="100%">
+<% for tipos in @tipos %>
+  <tr>
+    <th width="20%">Tipo:</th>
+    <th><%=h tipos.nome %></th>
+      <div class="botao">
+         <th align="right"><%= button_to('Excluir',{:action => "destroy", :id =>tipos}, :confirm => 'Confirma exclusão?', :method => "delete")%></th>
+      </div>
+    
+<% end %>
+</table>
+
+</font>

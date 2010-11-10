@@ -1,0 +1,40 @@
+<font  size="2">
+    <table border="2" width="100%">
+
+
+
+     <tr>
+        <th bgcolor="gray">Unidade</th>
+        <th bgcolor="gray">Estagiario</th>
+        <th bgcolor="gray">Responsavel</th>
+        <th bgcolor="gray">Data</th>
+        <th bgcolor="gray">Problema</th>
+        <th bgcolor="gray">Procedimentos</th>
+     </tr>
+         <% for relatorios in @relatorios %>
+     <tr>
+        <td><%=h relatorios.unidade.nome %></td>
+        <td><%=h relatorios.estagiario.nome %></td>
+        <td><%=h relatorios.responsavel %></td>
+        <td><%=h relatorios.data.strftime("%d/%m/%Y") %></td>
+        <td><%=h relatorios.problema %></td>
+        <td><%=h relatorios.procedimentos %></td>
+    </tr>
+     <tr>
+      <td colspan="6">
+        <div class="botao">
+        <table>
+           <td><%= button_to('Exibir',{:action => "show", :id =>relatorios}, :method => "get") %></td>
+           <% if current_user.has_role?('administrador') %>
+             <td> <%= button_to('Editar',{:action => "edit", :id =>relatorios}, :method => "get") %></td>
+             <td><%= button_to('Excluir',{:action => "destroy", :id =>relatorios}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+           <%end%>
+        </table>
+        </div>
+       </td>
+    </tr>
+
+    <% end %>
+
+   </table>
+</font>

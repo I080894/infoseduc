@@ -1,0 +1,95 @@
+<font  size="2">
+    <table border="2" width="100%">
+     <% for estagiarios in @estagiarios %>
+     <%if (estagiarios.flag == 0 and estagiarios.desligado == 0) then %>
+
+     <tr>
+       <th bgcolor="gray">Nome</th>
+       <th bgcolor="gray">RG</th>
+       <th bgcolor="gray">CPF</th>
+       <th colspan="2"bgcolor="gray">Endereco</th>
+       <th bgcolor="gray">Num</th>
+       <th bgcolor="gray">Complemento</th>
+     </tr>
+         <tr>
+       <td><%=h estagiarios.nome %></td>
+       <td><%=h estagiarios.RG %></td>
+       <td><%=h estagiarios.CPF %></td>
+       <td colspan="2"><%=h estagiarios.endereco %></td>
+       <td><%=h estagiarios.num %></td>
+       <td><%=h estagiarios.complemento %></td>
+    </tr>
+    <tr>
+       <th rowspan="6"></th>
+       <th bgcolor="gray">Bairro</th>
+       <th bgcolor="gray">Cidade</th>
+       <th bgcolor="gray">Fone</th>
+       <th bgcolor="gray">Cel</th>
+       <th bgcolor="gray">Data Nasc</th>
+       <th bgcolor="gray">Email</th>
+    </tr>
+    <tr>
+       <td><%=h estagiarios.bairro %></td>
+       <td><%=h estagiarios.cidade %></td>
+       <td><%=h estagiarios.fone %></td>
+       <td><%=h estagiarios.cel %></td>
+       <td><%=h estagiarios.data_nasc.strftime("%d/%m/%Y") %></td>
+       <td><%=h estagiarios.email %></td>
+    </tr>
+    <tr>
+
+        <th bgcolor="gray">Faculdade</th>
+        <th bgcolor="gray">Matricula</th>
+        <th bgcolor="gray">Periodo</th>
+        <th bgcolor="gray">Ingresso</th>
+        <th bgcolor="gray">Termino</th>
+        <th bgcolor="gray">Aval</th>
+        
+     <tr>
+
+       <td><%=h estagiarios.faculdade %></td>
+       <td><%=h estagiarios.matricula %></td>
+       <td><%=h estagiarios.periodo_est %></td>
+       <td><%=h estagiarios.data_ingresso.strftime("%d/%m/%Y") %></td>
+       <td><%=h estagiarios.data_termino.strftime("%d/%m/%Y") %></td>
+       <td><%=h estagiarios.aval %></td>
+    </tr>
+    <tr>
+        <th bgcolor="gray">Locacao</th>
+        <th bgcolor="gray">Periodo</th>
+        <th bgcolor="gray">Analista</th>
+        <th bgcolor="gray">Admissao</th>
+        <th bgcolor="gray">Desligamento</th>
+        <th bgcolor="gray">Obs</th>
+    </tr>
+     <tr>
+        <td><%=h estagiarios.unidade.nome %></td>
+        <td><%=h estagiarios.periodo_trab %></td>
+        <td><%=h estagiarios.responsavel %></td>
+        <td><%=h estagiarios.data_admissao.strftime("%d/%m/%Y") %></td>
+        <td><%=h estagiarios.data_desliga.strftime("%d/%m/%Y") %></td>
+        
+        <td><%=h estagiarios.obs %></td>
+    </tr>
+
+
+
+
+    <tr>
+      <td colspan="12">
+        <div class="botao">
+        <table>
+           <td><%= button_to('Exibir',{:action => "show", :id =>estagiarios}, :method => "get") %></td>
+           <% if current_user.has_role?('administrador') %>
+             <td> <%= button_to('Editar',{:action => "edit", :id =>estagiarios}, :method => "get") %></td>
+             <td><%= button_to('Excluir',{:action => "destroy", :id =>estagiarios}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+           <%end%>
+        </table>
+        </div>
+       </td>
+    </tr>
+
+    <% end %>
+    <% end %>
+   </table>
+</font>

@@ -1,0 +1,89 @@
+<br/>
+ <table  align="center" width="100%">
+  <td>
+  <fieldset><legend><font  size=5> UNIDADES SEM ESTAGIAÁRIO</font></legend>
+   <br/>
+   <div class="botao">
+   <table width="100%" align="center">
+    <tr>
+     <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
+       <td width="8%"><%= button_to 'Cadastrar', new_unidade_path %></td>
+     <%end%>
+     <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+     
+      <td align="right">
+       <div class="botao">
+         <table>
+        <tr>
+        <% form_tag unidades_path, :method => 'get' do %>
+        <td align="right"><font size="4"> Digite Unidade:</font>
+           <%= text_field_tag :search, params[:search] %>
+           <%= submit_tag "Filtrar", :name => nil %>
+        </td>
+        <% end %>
+        </tr>
+     </table>
+     </div>
+     </td>
+   </tr>
+  </table>
+  <br/>
+  </div>
+    <font  size="2">
+    <table border="2" width="100%">
+     
+    
+     <tr>
+       <th bgcolor="gray">Nome</th>
+       <th bgcolor="gray">Ensino</th>
+       <th bgcolor="gray">Endereco</th>
+       <th bgcolor="gray">Num</th>
+       <th bgcolor="gray">Bairro</th>
+       <th bgcolor="gray">Fone</th>
+       <th bgcolor="gray">Email</th>
+       <th bgcolor="gray">Diretor</th>
+       <th bgcolor="gray">Coordenador</th>
+
+     </tr>
+   <% for unidadesem in @sem_estagiarios %>
+     <tr>
+       <td><%=h unidadesem.nome %></td>
+       <td><%=h unidadesem.tipo.nome %></td>
+       <td><%=h unidadesem.endereco %></td>
+       <td><%=h unidadesem.num %></td>
+       <td><%=h unidadesem.bairro %></td>
+       <td><%=h unidadesem.fone %></td>
+       <td><%=h unidadesem.email %></td>
+       <td><%=h unidadesem.diretor %></td>
+       <td><%=h unidadesem.coordenador %></td>
+
+    </tr>
+    <tr>
+      <td colspan="12">
+        <div class="botao">
+        <table>
+           <td><%= button_to('Exibir',{:action => "show", :id =>unidadesem}, :method => "get") %></td>
+        </table>
+        </div>
+       </td>
+    </tr>
+    
+    <% end %>
+   </table>
+   </font>
+  </fieldset>
+  </table>
+  <div class="botao">
+   <table width="100%" align="center">
+    <tr>
+      <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
+          <td width="8%"><%= button_to 'Cadastrar', new_unidade_path %></td>
+      <%end%>
+      <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+
+  </table>
+  </div>
+
+   

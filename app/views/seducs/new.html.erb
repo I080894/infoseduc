@@ -1,0 +1,78 @@
+<br/>
+<fieldset><legend><font size=5> EQUIPAMENTOS SEDUC</font></legend>
+<font  size="2">
+ <table width="100%">
+ <% form_for(@seduc) do |f| %>
+ <%= f.error_messages %>
+  <tr>
+   <td width="50%">
+     <table>
+        <tr>
+          <td width="20%"align="left" ><b>Departamento:</b></td>
+          <td width="20%"align="left"> <%= f.collection_select :departamento_id, @departamentos, :id, :depto, :include_blank => ' -- Selecione -- ' %>
+              <%= observe_field 'seduc_departamento_id',
+              :with => :seduc_departamento_id,
+               :url => { :action => 'departamento_nome' } %> </td>
+           <td align="left"> <div id='nome_departamento'></div><div id='aviso'></div></td>
+         </tr>
+         <tr>
+           <td valign="top"align="left"><b>Servidor</b></td>
+           <td colspan="2" align="left"><%= f.text_field :servidor, :size => 46%></td>
+         </tr>
+        <tr>
+           <td valign="top"align="left"><b>Rede:</b></td>
+           <td colspan="2" align="left"><%= f.text_field :rede, :size => 46%></td>
+         </tr>
+        <tr>
+           <td valign="top"align="left"><b>Internet:</b></td>
+           <td colspan="2" align="left"><%= f.text_field :internet, :size => 46%></td>
+         </tr>
+         <tr>
+           <td valign="top"align="left"><b>Observações:</b></td>
+           <td colspan="2" align="left"><%= f.text_area(:obs, :cols =>"35", :rows => "7") %></td>
+         </tr>
+
+     </table>
+     </td>
+     <td width="50%" valign="top">
+       <table>
+
+        <tr>
+           <td valign="top"align="left"><b>Nº Computadores:</b></td>
+           <td colspan="2" align="left"><%= f.text_field :num_comp, :size =>"4" %></td>
+         </tr>
+         <tr>
+           <td valign="top"align="left"><b>Computadores:</b></td>
+           <td colspan="2" align="left"><%= f.text_area(:computador, :cols =>"35", :rows => "6") %></td>
+         </tr>
+        <tr>
+           <td valign="top"align="left"><b>Nº Impressoras:</b></td>
+           <td colspan="2" align="left"><%= f.text_field :num_imp, :size =>"4" %></td>
+         </tr>
+         <tr>
+           <td valign="top"align="left"><b>Impressoras:</b></td>
+           <td colspan="2" align="left"><%= f.text_area(:impressora, :cols =>"35", :rows => "3") %></td>
+         </tr>
+        </table>
+    </td>
+  </tr>
+
+</table>
+</font>
+</fieldset>
+<table  width="100%" align="center">
+   <tr>
+      <td align="left" width="6%">
+        <font size="4" color="red">
+        <div id='Certeza'>
+            <%= f.submit "Salvar" %>
+        </div>
+        </font>
+      </td>
+<%end%>
+
+    <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+   </tr>
+
+</table>
+

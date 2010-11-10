@@ -1,0 +1,74 @@
+<br/>
+ <table  align="center" width="100%">
+  <td>
+  <fieldset><legend><font  size=5>FORNECEDORES</font></legend>
+   <br/>
+   <font color="white" size="2">
+   <div class="botao">
+   <table width="100%">
+    <tr>
+      <td align="left" width="8%"><%= button_to 'Cadastrar', new_fornecedore_path %></td>
+      <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      <td align="left" width="8%" ><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+      <div class="botao">
+       <% form_tag consulta_path, :method => 'get' do %>
+        <td align="rigth"><font size="4"> Tipo Serviço:</font>
+           <%= text_field_tag :search, params[:search] %>
+           <%= submit_tag "Filtrar", :tipo_servico => nil %>
+        </td>
+        <% end %>         
+      </div>
+    </tr>
+  </table>
+  <br/>
+  </div>
+   <font color="white">
+   <table align="center"  border="2" width="100%">
+     <tr>
+        <th bgcolor="gray">Nome</th>
+        <th bgcolor="gray">Fone</th>
+        <th  bgcolor="gray">e_mail</th>
+        <th bgcolor="gray">Contato</th>
+        <th bgcolor="gray">Tipo servico</th>
+        <th bgcolor="gray">Obs</th>
+    </tr>
+    <% for fornecedores in @fornecedores %>
+     <tr>
+        <td><%=h fornecedores.nome %></td>
+        <td><%=h fornecedores.fone %></td>
+        <td><%=h fornecedores.email %></td>
+        <td><%=h fornecedores.contato %></td>
+        <td><%=h fornecedores.tipo_servico %></td>
+        <td><%=h fornecedores.obs %></td>
+      </tr>
+      <tr>
+        <td colspan="6">
+          <div class="botao">
+          <table>
+             <td><%= button_to('Exibir',{:action => "show", :id =>fornecedores}, :method => "get") %></td>
+             <% if current_user.has_role?('administrador') %>
+               <td> <%= button_to('Editar',{:action => "edit", :id =>fornecedores}, :method => "get") %></td>
+               <td><%= button_to('Excluir',{:action => "destroy", :id =>fornecedores}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+             <%end%>
+          </table>
+          </div>
+        </td>
+      </tr>
+      <%end%>
+ </table>
+ </font>
+ </font>
+ </fieldset>
+</td>
+</table>
+<div class="botao">
+   <table width="100%" align="center">
+    <tr>
+      <td align="left" width="8%"><%= button_to 'Cadastrar', new_fornecedore_path %></td>
+      <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+
+    </tr>
+  </table>
+  </div>
+

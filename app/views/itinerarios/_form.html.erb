@@ -1,0 +1,19 @@
+<% form_for(@itinerario) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :estagiario_id %><br />
+    <%= f.collection_select :estagiario_id, Estagiario.all, :id, :nome %>
+  </p>
+  <p>
+    <%= f.label :unidade_id %><br />
+    <%= f.collection_select :unidade_id, Unidade.all, :id, :nome %>
+  </p>
+  <p>
+    <%= f.label :data_visita %><br />
+    <%= f.date_select :data_visita %>
+  </p>
+  <p>
+    <%= f.submit "Salvar" %>
+  </p>
+<% end %>

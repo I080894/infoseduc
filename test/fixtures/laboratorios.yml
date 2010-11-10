@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  num_comp: 1
+  config_comp: MyText
+  servirdor: MyString
+  internet: MyString
+  num_imp: 1
+  config_imp: MyText
+  obs: MyText
+
+two:
+  num_comp: 1
+  config_comp: MyText
+  servirdor: MyString
+  internet: MyString
+  num_imp: 1
+  config_imp: MyText
+  obs: MyText

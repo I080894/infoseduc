@@ -1,0 +1,42 @@
+<h1>Listing chamados</h1>
+
+<table>
+  <tr>
+    <th>Data sol</th>
+    <th>Solicitante</th>
+    <th>Unidade</th>
+    <th>Forma sol</th>
+    <th>Problema</th>
+    <th>Data aten</th>
+    <th>Funcionario</th>
+    <th>Tipo problema</th>
+    <th>Patrimonio</th>
+    <th>Local</th>
+    <th>Procedimentos</th>
+    <th>Situacao</th>
+  </tr>
+
+<% for chamados in @chamados %>
+  <tr>
+    <td><%=h chamados.data_sol %></td>
+    <td><%=h chamados.solicitante %></td>
+    <td><%=h chamados.unidade %></td>
+    <td><%=h chamados.forma_sol %></td>
+    <td><%=h chamados.problema %></td>
+    <td><%=h chamados.data_aten %></td>
+    <td><%=h chamados.funcionario %></td>
+    <td><%=h chamados.tipo_problema %></td>
+    <td><%=h chamados.patrimonio %></td>
+    <td><%=h chamados.local %></td>
+    <td><%=h chamados.procedimentos %></td>
+    <td><%=h chamados.situacao %></td>
+    <td><%= link_to 'Show', chamados %></td>
+    <td><%= link_to 'Edit', edit_chamados_path(chamados) %></td>
+    <td><%= link_to 'Destroy', chamados, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New chamados', new_chamados_path %>

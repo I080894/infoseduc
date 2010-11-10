@@ -1,0 +1,41 @@
+<br/><br/>
+<table  align="center" width="80%">
+<td>
+ <fieldset><legend><font  size=5> RELATÓRIOS ESTARIÁRIOS ETINERANTES</font></legend>
+   <br/>
+   <table>
+    <tr>
+      <td>
+        <div class="botao">
+        <table>
+          <tr>
+            <td>
+               <font  size="4"> Selecione nome: <%= collection_select :relatorio, :estagiario_id, @estagiarios, :id, :nome, :include_blank => ' -- Selecione -- '  %></font>
+             </td>
+          </tr>
+       </table>
+       </div>
+      </td>
+    <tr>
+      <td>
+      <%= observe_field 'relatorio_estagiario_id',
+           :update => "listagem",
+           :url    => { :action => 'lista_relatorio' },
+           :with   => 'relatorio_estagiario_id' %>
+        <div id="listagem"> </div>
+     </td>
+   </tr>
+  </table>
+ </fieldset>
+
+  <div class="botao">
+   <table width="100%">
+    <tr>
+       <td align="left" width="8%" ><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+       <td align="left" ><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+    </tr>
+  </table>
+ </div>
+</table>
+  
+

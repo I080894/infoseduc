@@ -1,0 +1,81 @@
+<br/><br/>
+<table width="50%" align="center">
+<tr>
+<td>
+<fieldset><legend><font  size=5> ALTERAÇÂO DE LANÇAMENTOS => ENTRADA</font></legend>
+<% form_for(@entradas) do |f| %>
+<%= f.error_messages %>
+<font  size="2">
+<table width="100%" align="center">
+  <tr>
+    <td>
+     <fieldset><legend><font  size=4>Entrada </font></legend>
+       <table>
+          <td align="left"><b>Componente:</b></td>
+          <td align="left"><%=h @entradas.componente.nome %></td>
+           <td align="left"><%= f.collection_select :componente_id, @componentes, :id, :nome, :include_blank => ' -- Selecione -- ' %>
+                <%= observe_field 'entrada_componente_id',
+                  :frequency => 0.2,
+                  :with => :entrada_componente_id,
+                  :url => { :action => 'nome_estoque' } %>
+        </tr>
+         <tr>
+           <td align="left"><b>Espeficiação:</b></td>
+              <td align="left"><%=h @entradas.estoque.especifica %></td>
+           <td colspan="3"align="left"><div id= 'especificacao'></div></td>
+
+           <%= observe_field 'estrada_estoque_id',
+            :frequency => 0.5,
+            :update => "listagem",
+            :url    => { :action => 'especifica_estoque' },
+           :with   => 'estrada_estoque_id' %>
+         </tr>
+          <tr>
+             <td align="left"><b>Quantidade:</b></td>
+             <td  colspan="2" align="left"><%= f.text_field :quantidade, :size => 4 %></td>
+          </tr>
+          <tr>
+            <td align="left"><b>Data:</b></td>
+            <td  colspan="2" align="left"><%= f.date_select(:data_ent, :order => [:day, :month, :year], :start_year => (Date.today.year), :end_year => (Date.today.year - 50)) %></td>
+
+          </tr>
+          <tr>
+             <td align="left"><b>Procedência:</b></td>
+            <td  colspan="2" align="left"><%= f.text_field :procedencia%></td>
+          </tr>
+          <tr>
+             <td align="left"><b>NF:</b></td>
+            <td  colspan="2" align="left"><%= f.text_field :NF%></td>
+          </tr>
+          <tr>
+             <td align="left" valign="top"><b>Observações:</b></td>
+             <td  colspan="2" align="left"><%= f.text_area :obs, :cols =>34, :rows => "2"%></td>
+          </tr>
+           <tr>
+             <td colspan="3" align="left"><font color="red" size="3">Ao efetuar qualquer alteração nos lançamentos anotar no campo Observações justificativa e os valores originais antes das alterações</font></td>
+
+          </tr>
+       </table>
+     </fieldset>
+   </td>
+  </tr>
+</table>
+</font>
+</fieldset>
+</td>
+</tr>
+</table>
+<table  width="50%" align="center">
+  <tr>
+      <td align="left" width="6%">
+        <font size="4" color="red">
+        <div id='Certeza'>
+          <%= f.submit "Salvar" %>
+        </div>
+        </font>
+      </td>
+      <%end%>
+     <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%>
+     </td>
+  </tr>
+</table>

@@ -1,0 +1,83 @@
+<br/>
+ <table  align="center" width="100%">
+  <td>
+  <fieldset><legend><font  size=5> SENHAS</font></legend>
+   <br/>
+   <div class="botao">
+   <table width="100%">
+    <tr>
+     <td width="8%" align="left"><%= button_to 'Cadastrar', new_senha_path %></td>
+     <td width="8%" align="left"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+     <td width="8%" align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+     <% if  $var == 0 then %>
+        <td width="20%" align="left" colspan="4"><%= will_paginate @senhas %></td>
+      <%end%>
+
+     <td align="right">
+       <div class="botao">
+         <table>
+        <tr>
+        <% form_tag senhas_path, :method => 'get' do %>
+        <td align="right"><font size="4"> Digite Local:</font>
+           <%= text_field_tag :search, params[:search] %>
+           <%= submit_tag "Filtrar", :local => nil %>
+        </td>
+        <% end %>
+        </tr>
+     </table>
+     </div>
+     </td>
+   </tr>
+  </table>
+  <br/>
+  </div>
+    <font  size="2">
+    <table border="2" width="100%">
+
+     <tr>
+        <th bgcolor="gray">Local</th>
+        <th bgcolor="gray">Usuario</th>
+        <th bgcolor="gray">Senha</th>
+        <th bgcolor="gray">Fone Instalado</th>
+        <th bgcolor="gray">Obs</th>
+    </tr>
+    <% for senhas in @senhas %>
+    <tr>
+        <td><%=h senhas.unidade.nome %></td>
+        <td><%=h senhas.usuario %></td>
+        <td><%=h senhas.senha %></td>
+        <td><%=h senhas.fone %></td>
+        <td><%=h senhas.obs %></td>
+    </tr>
+    <tr>
+      <td colspan="12">
+        <div class="botao">
+        <table>
+           <td> <%= button_to('Editar',{:action => "edit", :id =>senhas}, :method => "get") %></td>
+           <td><%= button_to('Excluir',{:action => "destroy", :id =>senhas}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+        </table>
+        </div>
+       </td>
+    </tr>
+    <% end %>
+   </table>
+   </font>
+  </fieldset>
+  </table>
+  <div class="botao">
+   <table width="100%" align="center">
+    <tr>
+     <td width="8%"><%= button_to 'Cadastrar', new_senha_path %></td>
+      <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+      <% if  $var == 0 then %>
+         <tr><td align="left" colspan="4"><%= will_paginate @senhas %></td></tr>
+      <%end%>
+    </tr>
+  </table>
+  </div>
+
+
+
+
+

@@ -1,0 +1,20 @@
+<% if @itinerante.present? %>
+  <div id="calendar">
+    <h2 id="month">
+      <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m-%d"), :search => params[:search] %>
+      <%=h @date.strftime("%B %Y") %>
+      <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m-%d"), :search => params[:search] %>
+    </h2>
+    <% calendar_for @itinerante, :year => @date.year, :month => @date.month, :search => params[:search] do |calendar| %>
+      <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
+      <% calendar.day(:day_method => :data_visita) do |date, articles| %>
+        <%= date.day %>
+        <ul>
+          <% for data in articles %>
+            <li><%= link_to h(data.unidade.nome), data%></li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+  </div>
+<%end%>

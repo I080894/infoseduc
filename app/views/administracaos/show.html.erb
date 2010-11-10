@@ -1,0 +1,156 @@
+
+<br/>
+<fieldset><legend><font  size=5> EQUIPAMENTOS ADMINISTRAÇÃO</font></legend>
+<font  size="2">
+<table width="100%"  >
+  <tr>
+   <td>
+     <table>
+        <tr>
+          <td width="20%"align="left" ><b>Unidade:</b></td>
+          <td align="left"><%=h @administracaos.unidade.nome%></td>
+         </tr>
+     </table>
+   </td>
+  </tr>
+   <tr>
+    <td width="50%" align="left">
+     <fieldset><legend><font  size=4> Pertencentes à SEDUC</font></legend>
+     <table>
+       <tr>
+         <td width="20%" align="left"><b> Servidor:</b></td>
+         <td align="left"><%=h @administracaos.servidor %></td>
+       </tr>
+       <tr>
+         <td width="20%" align="left"><b> Rede:</b></td>
+         <td align="left"><%=h @administracaos.rede %></td>
+       </tr>
+       <tr>
+         <td width="20%" align="left"><b> Internet:</b></td>
+         <td align="left"><%=h @administracaos.internet %></td>
+       </tr>
+       <tr>
+         <td colspan="2" align="left">
+            <fieldset><legend><font  size=3>Computadores</font></legend>
+             <table>
+             <tr>
+               <td align="left"><b>Quantidade</b></td>
+               <td align="left"><%=h @administracaos.num_comp_seduc %></td>
+            </tr>
+            <tr>
+              <td align="left" valign="top"><b>Configuração:</b></td>
+              <td align="left"><%=h @administracaos.config_comp_seduc %></td>
+           </tr>
+           </table>
+          </fieldset>
+         </td>
+       </tr>
+       <tr>
+          <td colspan="2">
+            <fieldset><legend><font  size=3>Impressoras</font></legend>
+             <table>
+             <tr>
+               <td align="left"><b>Quantidade</b></td>
+               <td align="left"><%=h @administracaos.num_imp_seduc%></td>
+            </tr>
+            <tr>
+              <td align="left" valign="top"><b>Configuração:</b></td>
+              <td align="left"><%=h @administracaos.config_imp_seduc %></td>
+           </tr>
+           </table>
+          </fieldset>
+          </td>
+
+       </tr>
+           <td align="left"><b>Observações</b></td>
+           <td align="left"><%=h @administracaos.obs %></td>
+
+       <tr>
+       </tr>
+
+
+
+     </table>
+    </fieldset>
+   </td>
+   <td width="50%" valign="top"align="center">
+    <table>
+      <tr valign="top" >
+        <td width="50%" align="left">
+          <fieldset><legend><font  size=4> Não pertencentes SEDUC</font></legend>
+          <table width="100%">
+           <tr>
+            <td align="left">
+            <fieldset><legend><font  size=3>Computadores</font></legend>
+             <table>
+             <tr>
+               <td align="left"><b>Quantidade</b></td>
+               <td align="left"><%=h @administracaos.num_comp%>
+               </td>
+            </tr>
+            <tr>
+              <td align="left" valign="top"><b>Configuração:</b></td>
+               <td align="left"><%=h @administracaos.config_comp %></td>
+           </tr>
+           <tr>
+              <td align="left"><b> Pertence:</b></td>
+              <td align="left"><%=h @administracaos.pertence_comp %></td>
+           </tr>
+           <tr>
+              <td align="left"><b> Contato:</b></td>
+              <td align="left"><%=h @administracaos.contato_comp %></td>
+           </tr>
+           </table>
+          </fieldset>
+         </td>
+         </tr>
+         <tr>
+          <td align="left">
+            <fieldset><legend><font  size=3>Impressoras</font></legend>
+             <table>
+             <tr>
+               <td align="left"><b>Quantidade</b></td>
+               <td align="left"><%=h @administracaos.num_imp%>
+               </td>
+            </tr>
+            <tr>
+              <td align="left"><b>Configuração:</b></td>
+              <td align="left"><%=h @administracaos.config_imp %></td>
+           </tr>
+           <tr>
+              <td align="left"><b> Pertence:</b></td>
+              <td align="left"><%=h @administracaos.pertence_imp %></td>
+           </tr>
+           <tr>
+              <td align="left"><b> Contato:</b></td>
+              <td align="left"><%=h @administracaos.contato_imp %></td>
+           </tr>
+           </table>
+          </fieldset>
+          </td>
+
+        </table>
+        </fieldset>
+    </td>
+     </table>
+    </td>
+   </tr>
+  </table>
+ </font>
+ </fieldset>
+
+
+
+ <div class="botao">
+   <table width="100%" align="center">
+    <tr>
+     <td align="left" width="6%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+     <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
+       <td align="left" width="6%"> <%= button_to('Editar', {:action => "edit", :id => @administracaos}, :method => "get") %></td>
+       <td align="left" width="6%"> <%= button_to 'Cadastrar', new_administracao_path %></td>
+     <%end%>
+     <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+    </tr>
+  </table>
+</div>
+

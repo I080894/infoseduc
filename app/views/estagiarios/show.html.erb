@@ -1,0 +1,163 @@
+<br/>
+<br/>
+<table width="80%"align="center">
+<tr>
+<td>
+<fieldset><legend><font  size=5> ESTAGIÁRIOS</font></legend>
+<% form_for(@estagiarios) do |f| %>
+<%= f.error_messages %>
+<font  size="2">
+<table width="100%">
+  <tr>
+    <td width="50%"  valign="top">
+     <fieldset><legend><font  size=4> Dados Pessais</font></legend>
+     <table>
+       <tr>
+         <td align="left"><b>Nome:</b></td>
+         <td align="left"><%=h @estagiarios.nome %></td>
+       </tr>
+       <tr>
+         <td align="left"><b>RG:</b></td>
+         <td align="left"><%=h @estagiarios.RG %>
+             <font size="0.2">.......</font>
+             <b> CPF</b>
+              <%=h @estagiarios.CPF %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Endereço:</b></td>
+         <td align="left"> <%=h @estagiarios.endereco %>
+             <b>Nº: </b>
+             <%=h @estagiarios.num %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Complemento:</b></td>
+         <td align="left"><%=h @estagiarios.complemento %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Bairro:</b></td>
+         <td align="left"><%=h @estagiarios.bairro %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Cidade:</b></td>
+         <td align="left"><%=h @estagiarios.cidade %></td>
+       </tr>
+       <tr>
+         <td align="left"><b>Telefone:</b></td>
+         <td align="left"><%=h @estagiarios.fone %>
+             <font size="0.2">.......</font>
+             <b> Celular:</b>
+             <%=h @estagiarios.cel %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> e_mail:</b></td>
+         <td align="left"><%=h @estagiarios.email %></td>
+       </tr>
+
+       <tr>
+         <td align="left"><b>Data Nasc:</b></td>
+         <td align="left">  <%=h @estagiarios.data_nasc.strftime("%d de %B de %Y") %></td><p>
+       </tr>
+        <tr>
+        <td valign="top" align="left"><b>Observações:</b></td>
+        <td align="left">  <%=h @estagiarios.obs %></td>
+       </tr>
+     </table>
+    </fieldset>
+   </td>
+   <td width="50%" valign="top">
+    <table width="100%">
+      <tr valign="top">
+        <td>
+          <fieldset><legend><font  size=4> Dados Faculdade</font></legend>
+          <table>
+            <tr>
+             <td align="left"><b>Faculdade:</b></td>
+             <td align="left"><%=h @estagiarios.faculdade %></td>
+            </tr>
+            <tr>
+             <td align="left"><b> Matricula:</b></td>
+             <td align="left"> <%=h @estagiarios.matricula %>
+                  <b> Periodo:</b>
+                 <%=h @estagiarios.periodo_est %>
+             </td>
+           </tr>
+           <tr>
+             <td align="left"><b>Ingresso:</b></td>
+             <td align="left"><%=h @estagiarios.data_ingresso.strftime("%d de %B de %Y") %></td>
+          </tr>
+          <tr>
+            <td align="left"><b>Término:</b></td>
+            <td align="left"><%=h @estagiarios.data_termino.strftime("%d de %B de %Y") %></td>
+         </tr>
+        </table>
+        </fieldset>
+        </td
+       </tr>
+
+       <tr>
+        <td>
+         <fieldset><legend><font  size=4> Dados Contrato</font></legend>
+         <table>
+           <tr>
+               <td align="left"><b>Unidade:</b></td>
+                <td align="left"><%=h @estagiarios.unidade.nome %></td>
+           </tr>
+           <tr>
+              <td align="left"><b>Periodo:</b></td>
+              <td align="left"><%=h @estagiarios.periodo_trab %> </td>
+            </tr>
+            <tr>
+             <td align="left"><b>Admissão:</b></td>
+            <td align="left"> <%=h @estagiarios.data_admissao.strftime("%d de %B de %Y") %></td>
+           </tr>
+          <tr>
+              <% if @estagiarios.desligado == 1 %>
+              <td colspan="2" align="left"><b>Estagiário DESLIGADO</b></td>
+              <%else%>
+              <td colspan="2" align="left"><b>Estagiário EM ATIVIDADE</b></td>
+              <%end%>
+          </tr>
+           <tr>
+             <td align="left"><b>Desligamento:</b></td>
+             <td align="left"><%=h @estagiarios.data_desliga.strftime("%d de %B de %Y") %></td>
+           </tr>
+           <tr>
+            <td align="left"><b> Aval</b></td>
+            <td align="left"><%=h @estagiarios.aval %></td>
+          </tr>
+          <tr>
+              <td align="left"><b>Analista:</b></td>
+              <td align="left"><%=h @estagiarios.responsavel %> </td>
+          </tr>
+
+        </table>
+       </fieldset>
+
+       </td>
+      </tr>
+     </table>
+    </td>
+   </tr>
+  </table>
+ </font>
+ <%end%>
+ </fieldset>
+</td>
+</tr>
+</table>
+ <div class="botao">
+   <table width="80%" align="center">
+    <tr>
+     <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+     <% if current_user.has_role?('administrador') %>
+        <td align="left" width="8%"> <%= button_to('Editar', {:action => "edit", :id => @estagiarios}, :method => "get") %></td>
+        <td align="left" width="8%"> <%= button_to 'Cadastrar', new_estagiario_path %></td>
+    <%end%>
+     <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+    </tr>
+  </table>
+
+ </div>
+
+
+

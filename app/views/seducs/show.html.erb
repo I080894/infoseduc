@@ -1,0 +1,80 @@
+<br/>
+<table width="80%" align="center">
+<tr>
+<td>
+<fieldset><legend><font  size=5> EQUIPAMENTOS SEDUC</font></legend>
+<font  size="2">
+ <table width="100%">
+ <% form_for(@seduc) do |f| %>
+ <%= f.error_messages %>
+  <tr>
+   <td width="40%" valign="top">
+     <table>
+        <tr>
+          <td width="10%"align="left" ><b>Departamento:</b></td>
+          <td align="left">  <%=h @seduc.departamento.depto %></td>
+         </tr>
+         <tr>
+           <td valign="top"align="left"><b>Servidor</b></td>
+           <td  align="left"><%=h @seduc.servidor %></td>
+         </tr>
+        <tr>
+           <td valign="top"align="left"><b>Rede:</b></td>
+           <td align="left"><%=h @seduc.rede %></td>
+         </tr>
+        <tr>
+           <td valign="top"align="left"><b>Internet:</b></td>
+           <td align="left"><%=h @seduc.internet %></td>
+         </tr>
+         <tr>
+           <td valign="top"align="left"><b>Observações:</b></td>
+           <td align="left"><%=h @seduc.obs %></td>
+         </tr>
+
+     </table>
+     </td>
+     <td width="50%" valign="top">
+       <table>
+
+        <tr>
+           <td width="35%" valign="top"align="left"><b>Nº Computadores:</b></td>
+           <td align="left"><%=h @seduc.num_comp%></td>
+         </tr>
+         <tr>
+           <td valign="top"align="left"><b>Computadores:</b></td>
+           <td align="left"><%=h @seduc.computador%></td>
+         </tr>
+        <tr>
+           <td valign="top"align="left"><b>Nº Impressoras:</b></td>
+           <td align="left"><%=h @seduc.num_imp%></td>
+         </tr>
+         <tr>
+           <td valign="top"align="left"><b>Impressoras:</b></td>
+           <td align="left"><%=h @seduc.impressora%></td>
+         </tr>
+        </table>
+    </td>
+  </tr>
+
+</table>
+</font>
+</fieldset>
+<%end%>
+</td> 
+</tr>
+</table>
+<div class="botao">
+   <table width="80%" align="center">
+    <tr>
+     <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+     <td align="left" width="8%"> <%= button_to('Editar', {:action => "edit", :id => @seduc}, :method => "get") %></td>
+     <td align="left" width="8%"> <%= button_to 'Cadastrar', new_seduc_path %></td>
+     <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+    </tr>
+  </table>
+
+ </div>
+
+
+
+

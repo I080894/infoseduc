@@ -1,0 +1,67 @@
+<br/>
+ <table  align="center" width="40%">
+   <td>
+  <fieldset><legend><font  size=5> FORNECEDORES</font></legend>
+  <font  size="2">
+    <p align="left">
+      <b>Nome:</b>
+       <%=h @fornecedores.nome %>
+    </p>
+    <p align="left">
+       <b>Endereco:</b>
+       <%=h @fornecedores.endereco %>
+    </p>
+    <p align="left">
+      <b>Num:</b>
+      <%=h @fornecedores.num %>
+    </p>
+    <p align="left">
+      <b>Complemento:</b>
+      <%=h @fornecedores.complemento %>
+    </p>
+    <p align="left">
+      <b>Fone:</b>
+      <%=h @fornecedores.fone %>
+    </p>
+    <p align="left">
+      <b>Celular:</b>
+      <%=h @fornecedores.cel %>
+    </p>
+    <p align="left">
+      <b>Email:</b>
+      <%=h @fornecedores.email %>
+    </p>
+    <p align="left">
+      <b>Contato:</b>
+      <%=h @fornecedores.contato %>
+    </p>
+    <p align="left">
+      <b>Tipo Serviço:</b>
+      <%=h @fornecedores.tipo_servico %>
+    </p>
+        <p align="left">
+      <b>Aval:</b>
+      <%=h @fornecedores.aval %>
+    </p>
+    <p align="left">
+      <b>Observações:</b>
+      <%=h  @fornecedores.obs %>
+    </p>
+    <br/>
+   </font>
+  </fieldset>
+ </td>
+</table>
+ <div class="botao">
+<table width="40%" align="center">
+    <tr>
+     <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+     <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
+       <td align="left" width="8%"> <%= button_to('Editar', {:action => "edit", :id =>  @fornecedores}, :method => "get") %></td>
+       <td align="left" width="8%"> <%= button_to 'Cadastrar', new_fornecedore_path %></td>
+     <%end%>
+     <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+    </tr>
+</table>
+</div>
+

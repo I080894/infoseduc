@@ -1,0 +1,105 @@
+<br/>
+<fieldset><legend><font  size=5> ORDEM DE SERVIÇO</font></legend>
+<% form_for(@chamados) do |f| %>
+<%= f.error_messages %>
+<font  size="2">
+<table width="100%">
+  <tr>
+    <td valign="top"width="50% ">
+     <fieldset><legend><font  size=4> Solicitação</font></legend>
+     <table >
+       <tr>
+         <td align="left"><b>Data Solicitação:</b></td>
+         <td align="left"> <%= f.date_select(:data_sol, :order => [:day, :month, :year], :start_year => (Date.today.year)) %></td>
+       </tr>
+       <tr>
+         <td align="left"><b>Solicitante:</b></td>
+         <td><%= f.text_field :solicitante, :size => 38 %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Unidade:</b></td>
+         <td align="left"><%= f.collection_select :unidade_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- ', :size=> 30 %>
+        </td>
+       </tr>
+      <tr>
+         <td align="left"><b>Departamento:</b></td>
+         <td align="left"> <%= f.text_field :depto, :size => 38%>
+       </tr>
+       <tr>
+         <td align="left"><b>Forma Solicitação:</b></td>
+         <td align="left"><%= f.select :forma_sol, SOLICITACAO, :include_blank => '---Selecione---',  :size =>20  %></td>
+       </tr>
+       <tr>
+         <td align="left" valign="top"><b> Descrição Problema:</b></td>
+         <td align="left"><%= f.text_area :problema, :cols =>"42", :rows => "5" %></td>
+       </tr>
+        <tr>
+            <td align="left" valign="top"><b>Observação::</b></td>
+            <td align="left"><%= f.text_area :procedimentos, :cols =>"42", :rows => "2" %></td>
+        </tr>
+    </table>
+    </fieldset>
+
+   </td>
+   <td valign="top">
+    <table>
+      <tr valign="top">
+        <td>
+          <fieldset><legend><font  size=4> Atendimento</font></legend>
+          <table>
+           <tr>
+             <td align="left"><b>Data Atendimento:</b></td>
+             <td align="left"><%= f.date_select(:data_aten, :order => [:day, :month, :year], :start_year => (Date.today.year))%></td>
+           </tr>
+            <tr>
+             <td align="left"><b>Funcionário:</b></td>
+             <td align="left"><%= f.collection_select :estagiario_id, @estagiarios, :id, :nome, :include_blank => ' -- Selecione -- ', :size=> 20 %>
+          </tr>
+          <tr>
+             <td align="left"><b>Tipo Problema:</b></td>
+                         <td align="left"><%= f.collection_select :tipo_problema_id, @tipos, :id, :tipo, :include_blank => ' -- Selecione -- '%>
+          </tr>
+          <tr>
+             <td align="left"><b>Patrimônio:</b></td>
+             <td align="left"><%= f.text_field :patrimonio, :size => 9  %>
+                 <b>Local Atendimento:</b>
+                 <%= f.select :local, LOCAL, :include_blank => '---Selecione---',  :size =>20  %>
+             </td>
+          </tr>
+          <tr>
+            <td align="left" valign="top"><b>Procedimentos executados:</b></td>
+            <td align="left"><%= f.text_area :procedimentos, :cols =>"45", :rows => "5" %></td>
+          </tr>
+          <tr>
+            <td align="left"><b>Situação Chamado:</b></td>
+            <td align="left"><%= f.collection_select :situacao_chamado_id, @situacaos, :id, :situacao, :include_blank => ' -- Selecione -- '%>
+          </tr>
+          <tr>
+            <td align="left"><b>Término:</b></td>
+            <td align="left">    <%= f.date_select(:data_enc, :order => [:day, :month, :year], :start_year => (Date.today.year), :end_year => (Date.today.year + 5)) %><BR /></td><p>
+          </tr>
+        </table>
+        </fieldset>
+        </td
+       </tr>
+     </table>
+    </td>
+   </tr>
+  </table>
+ </font>
+ </fieldset>
+
+<table  width="100%" align="center">
+  <tr>
+      <td align="left" width="6%">
+        <font size="4" color="red">
+        <div id='Certeza'>
+          <%= f.submit "Salvar" %>
+        </div>
+        </font>
+      </td>
+      <%end%>
+     <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+   </tr>
+</table>
+

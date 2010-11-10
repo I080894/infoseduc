@@ -1,0 +1,53 @@
+<br/>
+<br/>
+<table width="60%"align="center">
+<tr>
+<td>
+<fieldset><legend><font  size=5> RELATORIO</font></legend>
+<% form_for(@relatorios) do |f| %>
+<%= f.error_messages %>
+<font  size="2">
+<table width="100%">
+
+  <tr>
+    <td width="10%"align="left"><b>Estagiário:</b></td>
+    <td align="left"><%=h @relatorios.estagiario.nome %></td>
+  </tr>
+  <tr>
+    <td align="left"><b>Data:</b></td>
+    <td align="left"><%=h @relatorios.data.strftime("%d de %B de %Y") %></td>
+  </tr>
+
+  <tr>
+    <td align="left"><b>Unidade:</b></td>
+    <td align="left"><%=h @relatorios.unidade.nome %></td>
+  </tr>
+  <tr>
+    <td align="left"><b>Responsável:</b></td>
+    <td align="left"><%=h @relatorios.responsavel %></td>
+  </tr>
+  <tr>
+    <td align="left"><b>Problemas:</b></td>
+    <td align="left"><%=h @relatorios.problema %></td>
+  </tr>
+  <tr>
+    <td align="left"><b>Procedimentos:</b></td>
+    <td align="left"><%=h @relatorios.procedimentos %></td>
+  </tr>
+</table>
+</font>
+<%end%>
+</fieldset>
+</td>
+</tr>
+</table>
+
+ <div class="botao">
+   <table width="60%" align="center">
+    <tr>
+     <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+     <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+    </tr>
+  </table>
+
+ </div>

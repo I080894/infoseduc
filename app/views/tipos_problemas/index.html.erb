@@ -1,0 +1,20 @@
+<h1>Listing tipos_problemas</h1>
+
+<table>
+  <tr>
+    <th>Tipo</th>
+  </tr>
+
+<% for tipos_problemas in @tipos_problemas %>
+  <tr>
+    <td><%=h tipos_problemas.tipo %></td>
+    <td><%= link_to 'Show', tipos_problemas %></td>
+    <td><%= link_to 'Edit', edit_tipos_problemas_path(tipos_problemas) %></td>
+    <td><%= link_to 'Destroy', tipos_problemas, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New tipos_problemas', new_tipos_problemas_path %>

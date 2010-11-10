@@ -1,0 +1,101 @@
+<br/>
+ <table  align="center" width="100%">
+  <td>
+  <fieldset><legend><font  size=5> ESTAGIÁRIOS CADASTRADOS</font></legend>
+   <br/>
+   <div class="botao">
+   <table width="100%">
+    <tr>
+     <% if current_user.has_role?('administrador') %>
+       <td width="8%" align="left"><%= button_to 'Cadastrar', new_estagiario_path %></td>
+     <%end%>
+     <td width="8%" align="left"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      <td width="8%" align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+      <% if  $var == 0 then %>
+         <td align="left" colspan="4"><%= will_paginate @estagiarios %></td>
+      <%end%>
+      <td align="right">
+       <div class="botao">
+         <table>
+        <tr>
+        <% form_tag estagiarios_path, :method => 'get' do %>
+        <td align="right"><font size="4"> Digite Nome:</font>
+           <%= text_field_tag :search, params[:search] %>
+           <%= submit_tag "Filtrar", :name => nil %>
+        </td>
+        <% end %>
+        </tr>
+     </table>
+     </div>
+     </td>
+   </tr>
+  </table>
+  <br/>
+  </div>
+    <font  size="2">
+    <table border="2" width="100%">
+
+     <% for estagiarios in @estagiarios %>
+     <%if (estagiarios.flag == 0 and estagiarios.desligado == 0 ) then %>
+      <tr>
+       <th bgcolor="gray">Nome</th>
+       <th bgcolor="gray">Fone</th>
+       <th bgcolor="gray">Cel</th>
+       <th bgcolor="gray">Email</th>
+       <th bgcolor="gray">Maticulado</th>
+       <th bgcolor="gray">Unidade</th>
+       <th bgcolor="gray">Período</th>
+
+    </tr>
+
+    <tr>
+       <td><%=h estagiarios.nome %></td>
+       <td><%=h estagiarios.fone %></td>
+       <td><%=h estagiarios.cel %></td>
+       <td><%=h estagiarios.email %></td>
+       <td><%=h estagiarios.periodo_est %></td>
+       <td><%=h estagiarios.unidade.nome %></td>
+       <td><%=h estagiarios.periodo_trab %></td>
+    </tr>
+    <tr>
+      <td colspan="12">
+        <div class="botao">
+        <table>
+           <td><%= button_to('Exibir',{:action => "show", :id =>estagiarios}, :method => "get") %></td>
+           <% if current_user.has_role?('administrador') %>
+             <td> <%= button_to('Editar',{:action => "edit", :id =>estagiarios}, :method => "get") %></td>
+             <td><%= button_to('Excluir',{:action => "destroy", :id =>estagiarios}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+           <%end%>
+        </table>
+        </div>
+       </td>
+    </tr>
+   <% end %>
+
+    <% end %>
+   </table>
+   </font>
+  </fieldset>
+  </table>
+  <div class="botao">
+   <table width="100%" align="center">
+    <tr>
+      <% if current_user.has_role?('administrador')  %>
+        <td width="8%"><%= button_to 'Cadastrar', new_estagiario_path %></td>
+      <%end%>
+      <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      <td width="8"align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+      <% if  $var == 0 then %>
+         <td align="left" colspan="4"><%= will_paginate @estagiarios %></td>
+      <%end%>
+      
+    </tr>
+  </table>
+  </div>
+
+
+
+
+
+
+

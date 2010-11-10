@@ -1,0 +1,163 @@
+<br/>
+<fieldset><legend><font  size=5> ESTAGIÁRIOS</font></legend>
+<% form_for(@estagiarios) do |f| %>
+<%= f.error_messages %>
+<font  size="2">
+<table width="100%">
+  <tr>
+    <td width="50%">
+     <fieldset><legend><font  size=4> Dados Pessais</font></legend>
+     <table>
+       <tr>
+         <td align="left"><b>Nome:</b></td>
+         <td><%= f.text_field :nome, :size =>40 %></td>
+             <%= observe_field :estagiario_nome,
+              :with => :estagiario_nome,
+              :url => { :action => 'mesmo_nome' } %>
+       </tr>
+        <tr>
+           <td colspan="2">
+            <font size="4" color="red">
+              <div id='nome_aviso'></div>
+            </font>
+          </td>
+       </tr>
+
+       <tr>
+         <td align="left"><b>RG:</b></td>
+         <td><%= f.text_field :RG, :size => 13 %>
+             <font size="0.2">....</font>
+             <b> CPF</b>
+              <%= f.text_field :CPF, :size => 13 %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Endereço:</b></td>
+         <td> <%= f.text_field :endereco, :size => 29%>
+             <b>Nº </b>
+             <%= f.text_field :num, :size => 2 %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Complemento:</b></td>
+         <td><%= f.text_field :complemento, :size =>40 %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Bairro:</b></td>
+         <td><%= f.text_field :bairro, :size =>40 %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Cidade:</b></td>
+         <td><%= f.text_field :cidade, :size =>40 %></td>
+       </tr>
+       <tr>
+         <td align="left"><b>Telefone:</b></td>
+         <td><%= f.text_field :fone, :size =>13 %>
+             <b> Celular:</b>
+             <%= f.text_field :cel, :size =>12 %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> e_mail:</b></td>
+         <td><%= f.text_field :email, :size =>40%></td>
+       </tr>
+
+       <tr>
+         <td align="left"><b>Data Nasc:</b></td>
+         <td align="left"><%= f.date_select(:data_nasc, :order => [:day, :month, :year], :start_year => (Date.today.year), :end_year => (Date.today.year - 50)) %><BR /></td><p>
+       </tr>
+        <tr>
+        <td valign="top"><b>Observações:</b></td>
+        <td><%= f.text_area(:obs, :cols =>"30", :rows => "3") %></td>
+       </tr>
+     </table>
+    </fieldset>
+   </td>
+   <td valign="top">
+    <table>
+      <tr valign="top">
+        <td>
+          <fieldset><legend><font  size=4> Dados Faculdade</font></legend>
+          <table>
+            <tr>
+             <td align="left"><b>Faculdade:</b></td>
+             <td> <%= f.text_field :faculdade, :size =>35 %>
+            </tr>
+            <tr>
+             <td align="left"><b> Matricula:</b></td>
+             <td><%= f.text_field :matricula, :size =>15  %>
+                 <%= f.select :periodo_est, PERIODO, :include_blank => '---Selecione---',  :size =>19 %>
+
+             </td>
+           </tr>
+           <tr>
+             <td align="left"><b>Ingresso:</b></td>
+             <td align="left">    <%= f.date_select(:data_ingresso, :order => [:day, :month, :year], :start_year => (Date.today.year), :end_year => (Date.today.year - 5)) %><BR /></td><p>
+          </tr>
+          <tr>
+            <td align="left"><b>Término:</b></td>
+            <td align="left">    <%= f.date_select(:data_termino, :order => [:day, :month, :year], :start_year => (Date.today.year), :end_year => (Date.today.year + 5)) %><BR /></td><p>
+          </tr>
+        </table>
+        </fieldset>
+        </td
+       </tr>
+
+       <tr>
+        <td>
+         <fieldset><legend><font  size=4> Dados Contrato</font></legend>
+         <table>
+           <tr>
+               <td align="left"><b>Unidade:</b></td>
+                <td align="left"><%= f.collection_select :unidade_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- ' %>
+                    <%= observe_field 'estagiario_unidade_id',
+                   :with => :estagiario_unidade_id,
+                   :url => { :action => 'nome_unidade' } %>
+                 </td>
+           </tr>
+           <tr>
+              <td align="left"><b>Locaçao:</b></td>
+              <td align="left"> <div id='unidade_nome'></div></td>
+            </tr>
+            <tr>
+             <td align="left"><b>Admissão:</b></td>
+            <td align="left">    <%= f.date_select(:data_admissao, :order => [:day, :month, :year], :start_year => (Date.today.year), :end_year => (Date.today.year - 10)) %></td><p>
+           </tr>
+           <tr>
+             <td align="left"><b>Desligado:</b></td>
+             <td align="left">sim <%= f.check_box :desligado %> em <%= f.date_select(:data_desliga, :order => [:day, :month, :year], :start_year => (Date.today.year), :end_year => (Date.today.year - 10)) %> </td><p>
+           </tr>
+           <tr>
+            <td align="left"><b> Período:</b></td>
+            <td align="left"><%= f.select :periodo_trab, PERIODO, :include_blank => '---Selecione---',  :size =>19 %>
+               <b> Aval:</b>
+               <%= f.text_field :aval, :size =>5 %> </td>
+          </tr>
+          <tr>
+              <td align="left"><b>Analista Responsável:</b></td>
+              <td align="left"> <%= f.text_field :responsavel, :size =>32%>
+            </tr>
+        </table>
+       </fieldset>
+
+       </td>
+      </tr>
+     </table>
+    </td>
+   </tr>
+  </table>
+ </font>
+ </fieldset>
+
+<table  width="100%" align="center">
+  <tr>
+      <td align="left" width="6%">
+        <font size="4" color="red">
+        <div id='Certeza'>
+          <%= f.submit "Salvar" %>
+        </div>
+        </font>
+      </td>
+      <%end%>
+     <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+   </tr>
+</table>
+
+

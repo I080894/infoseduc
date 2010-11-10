@@ -1,0 +1,199 @@
+logo{
+
+margin:90px 0px;
+background-image:url(Imagens/logo.jpg);
+background-repeat: no-repeat;
+height:120px;
+}
+#menu {
+   position:inherit;
+   left: 280px;
+   top: 20px;;
+}
+body {
+margin:0;
+background-color:#c4c4c4;
+}
+
+a:hover {
+  color:white;
+  background-color:gray;
+}
+#alinha{
+margin:25px;
+}
+
+#posicao_login {
+   position :relative;
+   left: 80px;
+   top: 70px;
+}
+
+#imagem_login{
+   background-image:url(Imagens/informatica.jpg);
+   background-repeat: no-repeat;
+   text-align: center;
+   color:white;
+   width:99.5%;
+   height:386px;
+   margin:0;
+   font:bold;
+   border-color:black;
+   border-left: double;
+   border-bottom: double;
+   border-top: double;
+   border-right: double;
+   }
+
+   #rodape_login{
+    background-image:url(Imagens/fundo_rodape.jpg);
+    
+  	position:relative;
+    width:100%;
+    color:white;
+    text-align:center;
+}
+
+#posicao_novo_usuario {
+   position:absolute;
+   left: 350px;
+   top: 200px;;
+}
+
+#posição1 {
+  margin:25px;
+}
+
+#conteudo3 {
+   position:absolute;
+   left: 100px;
+   top: 200px;
+}
+
+#topo {
+background-image:url(Imagens/americana.jpg);
+background-repeat: no-repeat;
+text-align: center;
+color:white;
+width:99.5%;
+height:84px;
+margin:0;
+font:bold;
+border-color:black;
+border-left: double;
+border-bottom: double;
+border-top: double;
+border-right: double;
+}
+
+#rodape{
+    background-image:url(Imagens/fundo_rodape.jpg);
+    margin:25px;
+  	position:relative;
+    top: 589px;
+    width:96%;
+    color:white;
+    text-align:center;
+}
+
+#caixasobre {
+background-image:url(Imagens/caixa.jpg);
+background-repeat: no-repeat;
+   text-align: center;
+   color:white;
+   height:650px;
+   width:950px;
+   margin:0;
+   font:bold;
+   border-color:black;
+   border-left: double;
+   border-bottom: double;
+   border-top: double;
+   border-right: double;
+}
+#posicaosobre {
+width:40%;
+margin-top: 50px;
+margin-left: 300px;
+}
+
+#contents{
+    margin:0 auto;
+    background-image:url(Imagens/body.jpg);
+  
+    width:950px;
+
+}
+
+#principal{
+    float:right;
+    width:950px;
+    background-image:url(Imagens/principal_body.gif);
+    font-size:10px;
+}
+
+#principal2{
+    float:right;
+    height:520px;
+    width:950px;
+    background-image:url(Imagens/principal_body.gif);
+    font-size:10px;
+    text-align: center;
+    color:white;
+    border-color:black;
+    border-left: double;
+    border-bottom: double;
+    border-top: double;
+    border-right: double;
+}
+#principal3{
+    float:right;
+
+    width:950px;
+    background-image:url(Imagens/principal_body.gif);
+    font-size:10px;
+    text-align: center;
+    color:white;
+    border-color:black;
+    border-left: double;
+    border-bottom: double;
+    border-top: double;
+    border-right: double;
+}
+
+#telaa.tam_padrao3{
+    float:right;
+    width:950px;
+    background-image:url(Imagens/principal_body.gif);
+    font-size:10px;
+    margin:0;
+    height:510px;
+    border-color:black;
+    border-left: double;
+    border-bottom: double;
+    border-top: double;
+    border-right: double;
+}
+#tela.tam_padrao{
+    margin:0;
+    height:510px;
+    border-color:black;
+    border-left: double;
+    border-bottom: double;
+    border-top: double;
+    border-right: double;
+}
+#logoInfo{
+   background-repeat: no-repeat;
+   text-align: center;
+   color:white;
+   width:945px;
+   margin:0;
+   font:bold;
+   border-color:black;
+   border-left: double;
+   border-bottom: double;
+   border-top: double;
+   border-right: double;
+}
+

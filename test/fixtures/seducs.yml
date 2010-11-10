@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  dpto: 
+  nome: MyString
+  funcionario: MyText
+  computador: MyText
+  impressora: MyText
+  rede: MyString
+  obs: MyText
+
+two:
+  dpto: 
+  nome: MyString
+  funcionario: MyText
+  computador: MyText
+  impressora: MyText
+  rede: MyString
+  obs: MyText

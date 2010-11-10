@@ -1,0 +1,53 @@
+
+<br/>
+<table width="80%" align="center">
+<tr>
+<td>
+<fieldset><legend><font  size=4>GERENCIAMENTO DE ACESSO</font></legend>
+ <font  size="2">
+   <table>
+    <tr>
+      <td width="6%"><%= button_to 'Associar', new_roles_user_path %></td>
+      <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+    </tr>
+   </table>
+   <table  border="2" width="100%">
+   <tr>
+      <th bgcolor="gray">Login</th>
+      <th bgcolor="gray">Acesso de</th>
+      <th bgcolor="gray">Descricao</th>
+    </tr>
+    <% for role_user in @role_users %>
+    <tr>
+      <td align="center" width="25%"><%= User.find(role_user.user_id).login %></td>
+      <td align="center"><%= Role.find(role_user.role_id).name %></td>
+      <%if Role.find(role_user.role_id).name == 'administrador' then%>
+        <td align="center">Usuário administrador do sistema. Acesso total ao sistema.</td>
+      <%else%>
+         <td align="center">Usuário estagiário. Acesso restrito ao sistema.</td>
+      <%end%>
+    </tr>
+    <tr>
+       <td colspan="12">
+         <div class="botao">
+         <table>
+            <td><%= button_to('Exibir',{:action => "show", :id =>role_user}, :method => "get") %></td>
+            <td> <%= button_to('Editar',{:action => "edit", :id =>role_user}, :method => "get") %></td>
+            <td><%= button_to('Excluir',{:action => "destroy", :id =>role_user}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+         </table>
+         </div>
+       </td>
+     </tr>
+    <% end %>
+  </table>
+ </font>
+ </fieldset>
+ <table>
+    <tr>
+      <td width="6%"><%= button_to 'Associar', new_roles_user_path %></td>
+      <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+    </tr>
+ </table>
+</td>
+</tr>
+</table>

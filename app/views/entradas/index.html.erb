@@ -1,0 +1,86 @@
+<br/>
+ <table  align="center" width="100%">
+  <td>
+  <fieldset><legend><font  size=5>LANÇAMENTOS => ENTRADAS</font></legend>
+   <br/>
+   <font  size="2">
+   <div class="botao">
+   <table width="100%">
+    <tr>
+     <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+     <td align="left" width="8%"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+      <% if  $var == 0 then %>
+         <td align="left" colspan="4"><%= will_paginate @entradas %></td>
+      <%end%>
+     
+      <td align="right">
+       <div class="botao">
+         <table>
+        <tr>
+        <% form_tag entradas_path, :method => 'get' do %>
+        <td align="right"><font size="4"> Digite Componente:</font>
+           <%= text_field_tag :search, params[:search] %>
+           <%= submit_tag "Filtrar", :nome => nil %>
+        </td>
+        <% end %> 
+        </tr>
+     </table>
+     </div>
+     </td>
+     </tr>
+  </table>
+  <br/>
+  </div>
+   <table align="center"  border="2" width="100%">
+       <tr>
+         <th bgcolor="gray">Componente</th>
+         <th bgcolor="gray">Especificação</th>
+         <th bgcolor="gray">Quantidade</th>
+         <th bgcolor="gray">Data</th>
+         <th bgcolor="gray">Procedencia</th>
+         <th bgcolor="gray">N.F.</th>
+         <th bgcolor="gray">Obsevação</th>
+      </tr>
+
+       <% for entradas in @entradas %>
+     <tr>
+        <td><%=h entradas.componente.nome %></td>
+        <td><%=h entradas.estoque.especifica %></td>
+        <td><%=h entradas.quantidade %></td>
+        <td><%=h entradas.data_ent.strftime("%d/%m/%Y")  %></td>
+        <td><%=h entradas.procedencia%></td>
+        <td><%=h entradas.NF %></td>
+        <td><%=h entradas.obs %></td>
+     </tr>
+  
+      <tr>
+        <td colspan="7">
+          <div class="botao">
+          <table>
+             <td><%= button_to('Exibir',{:action => "show", :id =>entradas}, :method => "get") %></td>
+     
+            </table>
+          </div>
+        </td>
+      </tr>
+
+    <% end %>
+ </table>
+ </font>
+ </fieldset>
+</td>
+</table>
+<div class="botao">
+   <table width="100%" align="center">
+    <tr>
+
+      <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      <td width="8"align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+      <% if  $var == 0 then %>
+         <td align="left" colspan="4"><%= will_paginate @entradas%></td>
+      <%end%>
+     
+    </tr>
+  </table>
+  </div>
+

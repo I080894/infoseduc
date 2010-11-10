@@ -1,0 +1,18 @@
+<p>
+  <b>Estagiario:</b>
+  <%=h @itinerario.estagiario.nome %>
+</p>
+
+<p>
+  <b>Unidade:</b>
+  <%=h @itinerario.unidade.nome %>
+</p>
+
+<p>
+  <b>Data visita:</b>
+  <%=h @itinerario.data_visita.strftime("%d/%m/%Y") %>
+</p>
+
+
+<%= link_to 'Alterar', edit_itinerario_path(@itinerario) %> |
+<%= link_to 'Voltar', itinerarios_path %>

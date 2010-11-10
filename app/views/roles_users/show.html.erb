@@ -1,0 +1,39 @@
+
+<br/><br/>
+<br/>
+<table width="50%"align="center">
+<tr>
+<td>
+<fieldset><legend><font  size=5>NÍVEL DE ACESSO</font></legend>
+<br/>
+ <font  size="2">
+   <table  border="1"width="100%">
+    <tr>     
+      <td bgcolor="gray" >Login:</td>
+      <td bgcolor="gray" >Nome Usuário:</td>
+      <td bgcolor="gray">Nível de acesso:</td>
+    </tr>
+    <tr>
+      <td><%= User.find(@role_user.user_id).login %></td>
+      <td><%= Role.find(@role_user.role_id).name %></td>
+      
+            <%if Role.find(@role_user.role_id).name == 'administrador' then%>
+                <td>Usuário administrador do sistema. Acesso total ao sistema.</td>
+            <%else%>
+                <td>Usuário estagiário. Acesso restrito ao sistema.</td>
+            <%end%>
+    </tr>
+   </table>
+  </font>
+ </fieldset>
+</table>
+ <div class="botao">
+   <table width="50%" align="center">
+    <tr>
+     <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+     <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+    </tr>
+  </table>
+
+ </div>
+

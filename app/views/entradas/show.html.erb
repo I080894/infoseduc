@@ -1,0 +1,65 @@
+<br/>
+<br/>
+<table width="50%"align="center">
+<tr>
+<td>
+<fieldset><legend><font  size=5> LANÇAMENTO DE ENTRADA</font></legend>
+<% form_for(@entradas) do |f| %>
+<%= f.error_messages %>
+<font  size="2">
+<table width="100%">
+  <tr>
+    <td width="30%" align="left"><b>Componente:</b></td>
+    <td align="left"><%=h @entradas.componente.nome %></td>
+  </tr>
+  <tr>
+     <td align="left"><b>Especificação:</b></td>
+   <td align="left"><%=h @entradas.estoque.especifica %></td>
+  </tr>
+  <tr>
+    <td align="left"><b>Quantidade:</b></td>
+    <td align="left"> <%=h @entradas.quantidade%>
+  </tr>
+  <tr>
+    <td align="left"><b> Data:</b></td>
+    <td align="left"> <%=h @entradas.data_ent.strftime("%d de %B de %Y")  %>
+  </tr>
+  <tr>
+    <td align="left"><b> Procedencia:</b></td>
+    <td align="left"> <%=h @entradas.procedencia%>
+  </tr>
+  <tr>
+    <td align="left"><b>Nota Fiscal:</b></td>
+    <td align="left"> <%=h @entradas.NF%>
+  </tr>
+  <tr>
+    <td align="left"><b>Observação:</b></td>
+    <td align="left"><%=h @entradas.obs %></td>
+  </tr>
+  <tr>
+    <td align="left"><b> Data Lançamento:</b></td>
+    <td align="left"> <%=h @entradas.created_at.strftime("%d de %B de %Y")  %>
+  </tr>
+    <tr>
+    <td align="left"><b> Data Alteração:</b></td>
+    <td align="left"> <%=h @entradas.updated_at.strftime("%d de %B de %Y")  %>
+  </tr>
+
+ </table>
+ </font>
+</fieldset>
+ <%end%>
+</td>
+</tr>
+</table>
+ <div class="botao">
+   <table width="50%" align="center">
+    <tr>
+     <td align="left" width="8%"><%= button_to 'Voltar', entradas_path, {:method => "get"} %></td>
+     <td align="left" width="8%"> <%= button_to('Editar', {:action => "edit", :id => @entradas}, :method => "get") %></td>
+     <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+    </tr>
+  </table>
+
+ </div>
+

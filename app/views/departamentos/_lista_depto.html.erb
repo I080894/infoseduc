@@ -1,0 +1,15 @@
+<br/>
+<font size="3">
+<table  width="100%">
+<% for departamentos in @departamentos %>
+  <tr>
+    <th width="20%">Departamento:</th>
+    <th><%=h departamentos.depto %></th>
+      <div class="botao">
+         <th align="right"><%= button_to('Excluir',{:action => "destroy", :id =>departamentos}, :confirm => 'Confirma exclusão?', :method => "delete")%></th>
+      </div>
+    
+<% end %>
+</table>
+
+</font>

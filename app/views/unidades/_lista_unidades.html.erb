@@ -1,0 +1,77 @@
+<br/>
+<font  size="4"><b><u> Resultado da Consulta</u></b></font>
+  <br/>  <br/>
+   <font  size="2">
+   <table border ="1" cellpadding="1" cellspacing="1" width="100%" >
+     <% for unidade in @unidades %>
+      <tr>
+       <th bgcolor="gray">Nome</th>
+       <th bgcolor="gray">Ensino</th>
+       <th bgcolor="gray">Endereco</th>
+       <th bgcolor="gray">Num</th>
+       <th bgcolor="gray">Complemento</th>
+       <th bgcolor="gray">Bairro</th>
+      </tr>
+      <tr>
+       <td><%=h unidade.nome %></td>
+       <td><%=h unidade.tipo.nome %></td>
+       <td><%=h unidade.endereco %></td>
+       <td><%=h unidade.num %></td>
+       <td><%=h unidade.complemento %></td>
+       <td><%=h unidade.bairro %></td>
+      </tr>
+      <tr>
+       <th rowspan="2" ></th>
+       <th bgcolor="gray">Fone</th>
+       <th bgcolor="gray">Email</th>
+       <th bgcolor="gray">Diretor</th>
+       <th bgcolor="gray">Coordenador</th>
+       <th bgcolor="gray">Obs</th>
+      </tr>
+      <tr>
+        <td><%=h unidade.fone %></td>
+        <td><%=h unidade.email %></td>
+        <td><%=h unidade.diretor %></td>
+        <td><%=h unidade.coordenador %></td>
+        <td><%=h unidade.obs %></td>
+     </tr>
+     <tr>
+       <th rowspan="2" ></th>
+       <th bgcolor="gray" colspan="5">Estagiários</th>
+       </tr>
+     <tr>
+        <td colspan="5" align="left">
+             <%unidade.estagiarios.each do |est| %>
+               <% if (est.desligado == 0) then%>
+                  <%=h est.nome %>(<%=h est.periodo_trab%>)
+              <%else%>
+                 Unidade sem estagiário
+              <%end%>
+           <%end%>
+        </td>
+     </tr>
+     <tr>
+        <td colspan="12">
+        <div class="botao">
+        <table>
+          <tr>
+           <td><%= button_to('Exibir',{:action => "show", :id =>unidade}, :method => "get") %></td>
+           <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
+             <td> <%= button_to('Editar',{:action => "edit", :id =>unidade}, :method => "get") %></td>
+             <% if current_user.has_role?('administrador')%>
+                <td><%= button_to('Excluir',{:action => "destroy", :id =>unidade}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+             <%end%>
+           <%end%>
+         </tr>
+       </table>
+        </div>
+       </td>
+    </tr>
+    <% end %>
+   </font>
+  </table>
+
+
+
+
+
