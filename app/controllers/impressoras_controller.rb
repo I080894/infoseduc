@@ -14,14 +14,15 @@ class ImpressorasController < ApplicationController
   end
 
   def index
-   #if (params[:search].nil? || params[:search].empty?)
+   if (params[:search].nil? || params[:search].empty?)
+    @impressoras = Impressora.find(:all)
    #   @impressoras = Impressora.paginate :page => params[:page], :order => 'created_at DESC', :per_page => 6
    #   $var = 0
-   # else
-   #   @impressoras = Impressora.find(:all, :joins => :unidade, :conditions => ["unidades.nome like ?", "%" + params[:search].to_s + "%"], :order => 'nome ASC')
+    else
+      @impressoras = Impressora.find(:all, :joins => :unidade, :conditions => ["unidades.nome like ?", "%" + params[:search].to_s + "%"], :order => 'nome ASC')
    #   $var=1
-    #end
-    @impressoras = Impressora.find(:all)
+  end
+   
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @impressoras }

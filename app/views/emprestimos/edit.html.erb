@@ -1,32 +1,10 @@
-<h1>Editing emprestimo</h1>
-
-<% form_for(@emprestimo) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :unidade %><br />
-    <%= f.text_field :unidade %>
-  </p>
-  <p>
-    <%= f.label :emprestimo %><br />
-    <%= f.datetime_select :emprestimo %>
-  </p>
-  <p>
-    <%= f.label :devolucao %><br />
-    <%= f.datetime_select :devolucao %>
-  </p>
-  <p>
-    <%= f.label :responsavel %><br />
-    <%= f.text_field :responsavel %>
-  </p>
-  <p>
-    <%= f.label :obs %><br />
-    <%= f.text_field :obs %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @emprestimo %> |
-<%= link_to 'Back', emprestimos_path %>
+<br/>
+<table width="60%" align="center">
+  <tr>
+   <td>
+     <fieldset><legend><font  size=5>EMPRESTIMO DATASHOW</font></legend>
+        <%= render 'form' %>
+     </fieldset>
+   </td>
+  </tr>
+</table>

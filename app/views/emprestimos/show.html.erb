@@ -8,7 +8,7 @@
     <td align="left"><font size=2><b>Unidade:</b></font></td>
     <td align="left"><font size=2><%=h @emprestimo.unidade.nome %></font></td>
   </tr>
-  <%if @empresimo.unidade_id == '53' then%>
+  <%if @emprestimo.unidade_id == 53 then%>
     <tr>
       <td align="left"><font size=2><b>Departamento:</b></font></td>
       <td align="left"><font size=2><%=h @emprestimo.departamento.depto %></font></td>
@@ -38,7 +38,8 @@
         <td align="left" width="8%"> <%= button_to('Editar', {:action => "edit", :id => @emprestimo}, :method => "get") %></td>
         <td align="left" width="8%"><%= button_to('Excluir',{:action => "destroy", :id =>@emprestimo}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
     <%end%>
-     <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+     <td align="left" width="8%"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+<td align="left" ><%= button_to 'Agenda', emprestimos_path, {:method => "get"} %></td>
     </tr>
   </table>
  </table>

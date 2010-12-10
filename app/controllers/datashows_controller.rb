@@ -11,15 +11,16 @@ class DatashowsController < ApplicationController
   end
 
    def load_unidades
-    @unidades = Unidade.find(:all, :order => 'nome ASC')
+     @unidades = Unidade.find(:all, :order => 'nome ASC')
   end
   def index
      if (params[:search].nil? || params[:search].empty?)
-      @datashows = Datashow.paginate :page => params[:page], :order => 'created_at DESC', :per_page => 10
-      $var = 0
+     @datashows = Datashow.find(:all)
+      # @datashows = Datashow.paginate :page => params[:page], :order => 'created_at DESC', :per_page => 10
+     # $var = 0
     else
       @datashows = Datashow.find(:all, :joins => :unidade, :conditions => ["unidades.nome like ?", "%" + params[:search].to_s + "%"], :order => 'nome ASC')
-      $var=1
+      #$var=1
     end
 
     respond_to do |format|
@@ -62,7 +63,7 @@ class DatashowsController < ApplicationController
 
     respond_to do |format|
       if @datashows.save
-        flash[:notice] = 'SALVO COM SUCESSO'
+        flash[:notice] = 'RESERVA REALIZADA COM SUCESSO'
         format.html { redirect_to(@datashows) }
         format.xml  { render :xml => @datashows, :status => :created, :location => @datashow }
       else
@@ -79,7 +80,7 @@ class DatashowsController < ApplicationController
 
     respond_to do |format|
       if @datashows.update_attributes(params[:datashow])
-        flash[:notice] = 'SALVO COM SUCESSO'
+        flash[:notice] = 'RESERVA ALTERADA COM SUCESSO'
         format.html { redirect_to(@datashows) }
         format.xml  { head :ok }
       else

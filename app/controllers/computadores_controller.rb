@@ -14,14 +14,15 @@ class ComputadoresController < ApplicationController
   end
 
   def index
-    #if (params[:search].nil? || params[:search].empty?)
-    #  @computadores = Computadore.paginate :page => params[:page], :order => 'created_at DESC', :per_page => 10
-    #  $var = 0
-   # else
-   #   @computadores = Computadore.find(:all, :joins => :unidade, :conditions => ["unidades.nome like ?", "%" + params[:search].to_s + "%"], :order => 'nome ASC')
-   #   $var=1
-   # end
-   @computadores = Computadore.find(:all)
+    if (params[:search].nil? || params[:search].empty?)
+      #@computadores = Computadore.paginate :page => params[:page], :order => 'created_at DESC', :per_page => 10
+      @computadores = Computadore.find(:all)
+      #$var = 0
+    else
+      @computadores = Computadore.find(:all, :joins => :unidade, :conditions => ["unidades.nome like ?", "%" + params[:search].to_s + "%"], :order => 'nome ASC')
+      #$var=1
+    end
+   
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @computadores }

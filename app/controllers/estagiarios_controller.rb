@@ -32,7 +32,7 @@ def load_estagiarios
   
   def index
    if (params[:search].nil? || params[:search].empty?)
-      @estagiarios = Estagiario.paginate :page => params[:page], :conditions =>['desligado=?',0], :order => 'nome ASC', :per_page => 16
+      @estagiarios = Estagiario.paginate :page => params[:page], :conditions =>['desligado=?',0], :order => 'nome ASC', :per_page => 10
       $var = 0
     else
       @estagiarios = Estagiario.find(:all, :conditions => (["nome like ?", "%" + params[:search].to_s + "%" ]), :order => 'nome ASC')
