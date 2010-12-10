@@ -115,22 +115,22 @@ def lista_estoque
     render :partial => 'lista_estoque'
   end
 
-
-
-   def nome_estoque
+ def nome_estoque
    $compo = params[:entrada_componente_id]
-  @estoques = Estoque.find :all, :conditions => {:componente_id => params[:entrada_componente_id]}
-
+   @estoques = Estoque.find :all, :conditions => {:componente_id => params[:entrada_componente_id]}
      render :update do |page|
       page.replace_html 'especificacao', :partial => 'especifica_box'
-
   end
-
-
 end
 
-	  
-
+def exibe_obs
+  $estoque = params[:entrada_estoque_id]
+  @estoque = Estoque.find(:all,:conditions => ['id =?',$estoque])
+  $estoque_obs= Estoque.find_by_id($estoque).obs
+       render :update do |page|
+         page.replace_html 'estoque_obs', :partial => 'exibe_obs'
+      end
+end
 end
 
 

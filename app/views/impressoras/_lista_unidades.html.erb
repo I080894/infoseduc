@@ -1,0 +1,70 @@
+
+ <table  align="center" width="100%">
+  <td>
+  <fieldset><legend><font  size=5> Cadastrados</font></legend>
+   <br/>
+   <div class="botao">
+   <table width="100%">
+    <tr>
+      <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+     <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+   </tr>
+  </table>
+  <br/>
+  </div>
+    <font  size="2">
+    <table border="2" width="100%">
+      <%$impr = 0%>
+     <% for imp in @impressoras %>
+      <tr>
+        <th bgcolor="gray">Unidade</th>
+         <th bgcolor="gray">Tipo Controle</th>
+        <th bgcolor="gray">Quantidade</th>
+        <th bgcolor="gray">Configuração</th>
+        <th bgcolor="gray">Usuário</th>
+        <%if imp.tipo_controle.nome == 'TERCEIROS'%>
+          <th bgcolor="gray">Pertence</th>
+          <th bgcolor="gray">Contato</th>
+        <%else%>
+          <th bgcolor="gray">Nº Patrimônio</th>
+        <%end%>
+      </tr>
+      <tr>
+       <td><%=h imp.unidade.nome %></td>
+       <td><%=h imp.tipo_controle.nome %></td>
+       <td><%=h imp.quant %></td>
+       <td><%=h imp.config %></td>
+       <td><%=h imp.user %></td>
+       <%if imp.tipo_controle.nome == 'TERCEIROS'%>
+         <td><%=h imp.pertence %></td>
+         <td><%=h imp.contato %></td>
+       <%else%>
+         <td align="left"><%=h imp.pat %></td>
+        <%end%>
+        
+     </tr>
+       <%$impr = $impr + imp.quant%>
+    <tr>
+      <td colspan="7">
+        <div class="botao">
+        <table>
+           <td><%= button_to('Exibir',{:action => "show", :id =>imp}, :method => "get") %></td>
+          <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
+            <td> <%= button_to('Editar',{:action => "edit", :id =>imp}, :method => "get") %></td>
+            <% if current_user.has_role?('administrador')%>
+               <td><%= button_to('Excluir',{:action => "destroy", :id =>imp}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+            <%end%>
+          <%end%>
+        </table>
+        </div>
+       </td>
+    </tr>
+    <% end %>
+    <tr>
+       <td align="left"colspan="7"><font color="black">Total de Computadores  => <%=  $impr%></font></td>
+    </tr>
+   </table>
+   </font>
+  </fieldset>
+  </table>
+

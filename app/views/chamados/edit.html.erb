@@ -1,60 +1,12 @@
-<h1>Editing chamados</h1>
+<br/>
+<table width="6%" align="center">
+  <tr>
+   <td>
+      <fieldset><legend><font  size=5> ORDEM DE SERVIÇO</font></legend>
+         <%= render 'form' %>
+      </fieldset>
 
-<% form_for(@chamados) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :data_sol %><br />
-    <%= f.datetime_select :data_sol %>
-  </p>
-  <p>
-    <%= f.label :solicitante %><br />
-    <%= f.text_field :solicitante %>
-  </p>
-  <p>
-    <%= f.label :unidade %><br />
-    <%= f.text_field :unidade %>
-  </p>
-  <p>
-    <%= f.label :forma_sol %><br />
-    <%= f.text_field :forma_sol %>
-  </p>
-  <p>
-    <%= f.label :problema %><br />
-    <%= f.text_field :problema %>
-  </p>
-  <p>
-    <%= f.label :data_aten %><br />
-    <%= f.datetime_select :data_aten %>
-  </p>
-  <p>
-    <%= f.label :funcionario %><br />
-    <%= f.text_field :funcionario %>
-  </p>
-  <p>
-    <%= f.label :tipo_problema %><br />
-    <%= f.text_field :tipo_problema %>
-  </p>
-  <p>
-    <%= f.label :patrimonio %><br />
-    <%= f.text_field :patrimonio %>
-  </p>
-  <p>
-    <%= f.label :local %><br />
-    <%= f.text_field :local %>
-  </p>
-  <p>
-    <%= f.label :procedimentos %><br />
-    <%= f.text_field :procedimentos %>
-  </p>
-  <p>
-    <%= f.label :situacao %><br />
-    <%= f.text_field :situacao %>
-  </p>
-  <p>
-    <%= f.submit "Update" %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @chamados %> |
-<%= link_to 'Back', chamados_path %>
+   </td>
+  </tr>
+</table>
+<br/>

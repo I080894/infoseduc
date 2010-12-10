@@ -1,19 +1,29 @@
 <% form_for(@itinerario) do |f| %>
   <%= f.error_messages %>
+  <table >
+    <tr>
+      <td align="left"><font size=2><b>Estagiário:</b></font></td>
+      <td align="left"><font size=2><%= f.collection_select :estagiario_id, @estagiarios, :id, :nome, :include_blank => ' -- Selecione -- '  %></font></td>
+    </tr>
+    <tr>
+      <td align="left"><font size=2><b>Unidade:</b></font></td>
+      <td align="left"><font size=2><%= f.collection_select :unidade_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- '  %></font></td>
+    </tr>
+    <tr>
+      <td align="left"><font size=2><b>Data Visita:</b></font></td>
+      <td align="left"><font size=2><%= f.date_select :data_visita %></font></td>
+    </tr>
+    <tr>
+      <td align="left" valign="top"><font size=2><b>Observações:</b></font></td>
+      <td align="left"><font size=2><%= f.text_area(:obs, :cols =>50, :rows => "2") %></font></td>
+    </tr>
+    <table>
+      <tr>
+        <td align="left" width="8%"><%= f.submit "Salvar" %></td>
+        <% end %>
+        <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      </tr>
+    </table>
+  </table>
+  <br/>
 
-  <p>
-    <%= f.label :estagiario_id %><br />
-    <%= f.collection_select :estagiario_id, Estagiario.all, :id, :nome %>
-  </p>
-  <p>
-    <%= f.label :unidade_id %><br />
-    <%= f.collection_select :unidade_id, Unidade.all, :id, :nome %>
-  </p>
-  <p>
-    <%= f.label :data_visita %><br />
-    <%= f.date_select :data_visita %>
-  </p>
-  <p>
-    <%= f.submit "Salvar" %>
-  </p>
-<% end %>

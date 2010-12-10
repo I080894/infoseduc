@@ -1,0 +1,67 @@
+<br/>
+<font  size="2">
+<table width="100%" align="center">
+ <tr>
+  <td>
+   <fieldset><legend><font  size=5> ORDEM DE SERVIÇO</font></legend>
+     <table>
+       <tr>
+         <td width="40%" valign="TOP">
+           <%= render 'formshow' %>
+         </td>
+        <td>
+         <fieldset><legend><font  size=4> Atendimento</font></legend>
+           <table>
+              <tr>
+                <td align="left" width="20%"><b>Data Atendimento:</b></td>
+                <td align="left"><%=h @chamados.data_aten.strftime("%d de %B de %Y") %></td>
+              </tr>
+              <tr>
+                <td align="left"><b>Funcionário:</b></td>
+                <td align="left"><%=h @chamados.estagiario.nome %></td>
+             </tr>
+             <tr>
+                <td align="left"><b>Tipo Problema:</b></td>
+               <td align="left"><%=h @chamados.tipos_problema.tipo %></td>
+
+            </tr>
+            <tr>
+               <td align="left"><b>Patrimônio:</b></td>
+               <td align="left"><%=h @chamados.patrimonio %>
+                 <b>Local Atendimento:</b><%=h @chamados.local %></td>
+           </tr>
+           <tr>
+              <td align="left" valign="top"><b>Procedimentos executados:</b></td>
+              <td align="left"><%=h @chamados.procedimentos %></td>
+           </tr>
+           <tr>
+              <td align="left"><b>Situação Chamado:</b></td>
+              <td align="left"><%=h @chamados.situacao_chamado.situacao %></td>
+           </tr>
+           <tr>
+             <td align="left"><b>Término:</b></td>
+             <td align="left"><%=h @chamados.data_enc.strftime("%d de %B de %Y") %></td>
+           </tr>
+         </table>
+        </fieldset>
+      </td>
+     </tr>
+       <div class="botao">
+         <table width="50%" align="left">
+          <tr>
+           <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+           <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+          </tr>
+        </table>
+       </div>
+
+
+        </table>
+  </fieldset>
+ </td>
+ </tr>
+
+</table>
+<br/>
+
+

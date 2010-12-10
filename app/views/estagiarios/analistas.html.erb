@@ -15,8 +15,8 @@
        <div class="botao">
          <table>
         <tr>
-        <% form_tag estagiarios_path, :method => 'get' do %>
-        <td align="right"><font size="4"> Digite Nome:</font>
+        <% form_tag analistas_path, :method => 'get' do %>
+        <td align="right"><font size="4"> Digite nome:</font>
            <%= text_field_tag :search, params[:search] %>
            <%= submit_tag "Filtrar", :name => nil %>
         </td>
@@ -39,9 +39,10 @@
        <th bgcolor="gray">Fone</th>
        <th bgcolor="gray">Cel</th>
        <th bgcolor="gray">Email</th>
-       <th bgcolor="gray">Maticulado</th>
-       <th bgcolor="gray">Unidade</th>
-       <th bgcolor="gray">Período</th>
+       <th bgcolor="gray">Endereco</th>
+       <th bgcolor="gray">Nº</th>
+       <th bgcolor="gray">Bairro</th>
+       <th bgcolor="gray">Cidade</th>
 
     </tr>
 
@@ -50,9 +51,11 @@
        <td><%=h estagiarios.fone %></td>
        <td><%=h estagiarios.cel %></td>
        <td><%=h estagiarios.email %></td>
-       <td><%=h estagiarios.periodo_est %></td>
-       <td><%=h estagiarios.unidade.nome %></td>
-       <td><%=h estagiarios.periodo_trab %></td>
+       <td><%=h estagiarios.endereco %></td>
+       <td><%=h estagiarios.num%></td>
+       <td><%=h estagiarios.bairro %></td>
+       <td><%=h estagiarios.cidade %></td>
+
     </tr>
     <tr>
       <td colspan="12">
@@ -87,6 +90,7 @@
     </tr>
   </table>
   </div>
+  <br/>
 
 
 

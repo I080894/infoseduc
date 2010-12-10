@@ -1,42 +1,137 @@
-<h1>Listing chamados</h1>
+<br/>
+ <table  align="center" width="100%">
+  <td>
+  <fieldset><legend><font  size=5> ORDEM DE SERVIÇO</font></legend>
+   <br/>
+   <div class="botao">
+   <table width="100%">
+    <tr>
+     <% if current_user.has_role?('administrador') %>
+       <td width="8%" align="left"><%= button_to 'Cadastrar', new_chamado_path %></td>
+     <%end%>
+     <td width="8%" align="left"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      <td width="8%" align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
 
-<table>
-  <tr>
-    <th>Data sol</th>
-    <th>Solicitante</th>
-    <th>Unidade</th>
-    <th>Forma sol</th>
-    <th>Problema</th>
-    <th>Data aten</th>
-    <th>Funcionario</th>
-    <th>Tipo problema</th>
-    <th>Patrimonio</th>
-    <th>Local</th>
-    <th>Procedimentos</th>
-    <th>Situacao</th>
-  </tr>
+      <td align="right">
+       <div class="botao">
+         <table>
+        <tr>
+        <% form_tag chamados_path, :method => 'get' do %>
+        <td align="right"><font size="4"> Unidade:</font>
+           <%= text_field_tag :search, params[:search] %>
+           <%= submit_tag "Filtrar", :name => nil %>
+        </td>
+        <% end %>
+        </tr>
+     </table>
+     </div>
+     </td>
+   </tr>
+  </table>
+  <br/>
+  </div>
+    <font  size="2">
+    <table border="2" width="100%">
+      <%$total=0%>
+      <%$conta=0%>
+      <%$contc=0%>
+      <%$contm=0%>
+      <%$contt=0%>
+      <tr>
+        <th bgcolor="gray">Nº Ordem</th>
+        <th bgcolor="gray">Data sol</th>
+        <th bgcolor="gray">Solicitante</th>
+        <th bgcolor="gray">Unidade</th>
+        <th bgcolor="gray">Solicitação</th>
+        <th bgcolor="gray">Problema</th>
+        <th bgcolor="gray">Status</th>
+    </tr>
+    <% for chamados in @chamados %>
+     <%if (chamados.situacao_chamado_id != 2) then %>
 
-<% for chamados in @chamados %>
-  <tr>
-    <td><%=h chamados.data_sol %></td>
-    <td><%=h chamados.solicitante %></td>
-    <td><%=h chamados.unidade %></td>
-    <td><%=h chamados.forma_sol %></td>
-    <td><%=h chamados.problema %></td>
-    <td><%=h chamados.data_aten %></td>
-    <td><%=h chamados.funcionario %></td>
-    <td><%=h chamados.tipo_problema %></td>
-    <td><%=h chamados.patrimonio %></td>
-    <td><%=h chamados.local %></td>
-    <td><%=h chamados.procedimentos %></td>
-    <td><%=h chamados.situacao %></td>
-    <td><%= link_to 'Show', chamados %></td>
-    <td><%= link_to 'Edit', edit_chamados_path(chamados) %></td>
-    <td><%= link_to 'Destroy', chamados, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
 
-<br />
+    <tr>
+        <td><%=h chamados.id %></td>
+        <td><%=h chamados.data_sol.strftime("%d/%m/%Y")  %></td>
+        <td><%=h chamados.solicitante %></td>
+        <td><%=h chamados.unidade.nome %></td>
+        <td><%=h chamados.forma_sol %></td>
+        <td><%=h chamados.problema %></td>
+        <td><%=h chamados.situacao_chamado.situacao %></td>
+    </tr>
+      <%if (chamados.situacao_chamado_id == 1) then %>
+        <%$conta=$conta+1%>
+      <%end%>
+      <%if (chamados.situacao_chamado_id == 3) then %>
+        <%$contc=$contc+1%>
+      <%end%>
+      <%if (chamados.situacao_chamado_id == 4) then %>
+        <%$contm=$contm+1%>
+      <%end%>
+      <%if (chamados.situacao_chamado_id == 5) then %>
+        <%$contt=$contt+1%>
+      <%end%>
 
-<%= link_to 'New chamados', new_chamados_path %>
+     <tr>
+      <td colspan="12">
+        <div class="botao">
+        <table>
+           
+           <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
+             <td> <%= button_to('Ordem Serviço',{:action => "ordemservico", :id =>chamados}, :method => "get") %></td>
+             <% if current_user.has_role?('administrador')%>
+                <td><%= button_to('Excluir',{:action => "destroy", :id =>chamados}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+             <%end%>
+           <%end%>
+        </table>
+        </div>
+       </td>
+    </tr>
+   <% end %>
+
+    <% end %>
+    <tr>
+   <%$total= $conta+$contc+$contm+$contt%>
+      <td  align="left"><font  color ="black "size="2">
+         <b> Total:<%= $total %></b></font> </td>
+      <td colspan="2" align="left"><font  color ="black "size="2">
+        <b>Em Aberto: <%= $conta %></b></font> </td>
+       <td  align="left"><font  color ="black "size="2">
+        <b>Aguardando Compras: <%= $contc %></b>
+       </font> </td>
+       <td colspan="2" align="left"><font  color ="black "size="2">
+        <b>Aguardando Motorista: <%= $contm %></b>
+       </font> </td>
+       <td  align="left"><font  color ="black "size="2">
+         <b>Serviço Terceiros: <%= $contt %></b></font> </td>
+
+   </tr>
+   </table>
+   </font>
+  </fieldset>
+  </table>
+  <div class="botao">
+   <table width="100%" align="center">
+    <tr>
+      <% if current_user.has_role?('administrador')  %>
+        <td width="8%"><%= button_to 'Cadastrar', new_chamado_path %></td>
+      <%end%>
+      <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      <td width="8"align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+
+    </tr>
+  </table>
+  </div>
+  <br/>
+
+
+
+
+
+
+
+
+
+
+
+

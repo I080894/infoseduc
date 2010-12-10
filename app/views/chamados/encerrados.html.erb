@@ -1,0 +1,102 @@
+<br/>
+ <table  align="center" width="100%">
+  <td>
+  <fieldset><legend><font  size=5> ORDEM DE SERVIÇO ENCERRADAS</font></legend>
+   <br/>
+   <div class="botao">
+   <table width="100%">
+    <tr>
+     <td width="8%" align="left"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      <td width="8%" align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+      <td align="right">
+       <div class="botao">
+         <table>
+        <tr>
+        <% form_tag encerrados_path, :method => 'get' do %>
+        <td align="right"><font size="4"> Unidade:</font>
+           <%= text_field_tag :search, params[:search] %>
+           <%= submit_tag "Filtrar", :name => nil %>
+        </td>
+        <% end %>
+        </tr>
+     </table>
+     </div>
+     </td>
+   </tr>
+  </table>
+  <br/>
+  </div>
+    <font  size="2">
+    <table border="2" width="100%">
+      <%$conta=0%>
+      
+      <tr>
+        <th bgcolor="gray">Nº Ordem</th>
+        <th bgcolor="gray">Data sol</th>
+        <th bgcolor="gray">Solicitante</th>
+        <th bgcolor="gray">Unidade</th>
+        <th bgcolor="gray">Problema</th>
+        <th bgcolor="gray">Procedimento Executado</th>
+        <th bgcolor="gray">Funcionário</th>
+        <th bgcolor="gray">Status</th>
+    </tr>
+    <% for chamados in @chamados %>
+     <%if (chamados.situacao_chamado_id == 2) then %>
+
+
+    <tr>
+        <td><%=h chamados.id %></td>
+        <td><%=h chamados.data_sol.strftime("%d/%m/%Y")  %></td>
+        <td><%=h chamados.solicitante %></td>
+        <td><%=h chamados.unidade.nome %></td>
+        <td><%=h chamados.problema %></td>
+        <td><%=h chamados.procedimentos %></td>
+        <td><%=h chamados.estagiario.nome %></td>
+        <td><%=h chamados.situacao_chamado.situacao %></td>
+    </tr>
+        <%$conta=$conta+1%>
+      
+     <tr>
+      <td colspan="12">
+        <div class="botao">
+        <table>
+           
+           <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
+             <td> <%= button_to('Exibir',{:action => "showencerrado", :id =>chamados}, :method => "get") %></td>
+           <%end%>
+        </table>
+        </div>
+       </td>
+    </tr>
+   <% end %>
+
+    <% end %>
+    <tr>
+      <td colspan="7" align="left"><font  color ="black "size="2">
+         <b> Total de Ordem de Serviço Encerradas:  <%= $conta %></b></font> </td>
+         </tr>
+   </table>
+   </font>
+  </fieldset>
+  </table>
+  <div class="botao">
+   <table width="100%" align="center">
+    <tr>
+      <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      <td width="8"align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+    </tr>
+  </table>
+  </div>
+  <br/>
+
+
+
+
+
+
+
+
+
+
+
+

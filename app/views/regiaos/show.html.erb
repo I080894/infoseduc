@@ -1,0 +1,48 @@
+<br/>
+<font size="2">
+<table width="50%"align="center" >
+<tr>
+<td>
+<fieldset><legend><font  size=5> REGIÕES</font></legend>
+<table width="100%">
+  <tr>
+    <td align="left" width="6%"><b>Região:</b></td>
+    <td align="left"><%=h @regiaos.regiao %></td>
+  </tr>
+  <tr>
+    <td align="left"><b>Locais:</b></td>
+    <td align="left"><%=h @regiaos.local %> </td>
+  </tr>
+  <tr>
+    <td align="left"><b>Unidades:</b></td>
+    <td align="left"><%=h @regiaos.unidade %></td>
+  </tr>
+  <tr>
+    <td align="left"><b>Estagiário:</b></td>
+    <% @regiaos.estagiarios.each do |est| %>
+      <%if est.desligado == 0 then%>
+         <td align="left"><%=h est.nome %></td>
+      <%end%>
+     <%end%>
+  </tr>
+  <tr>
+    <td align="left"><b>Observações:</b></td>
+    <td align="left"><%=h @regiaos.obs %></td>
+  </tr>
+  <div class="botao">
+   <table>
+    <tr>
+      <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+     <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+    </tr>
+  </table>
+  </div>
+ </table>
+</fieldset>
+</td>
+</tr>
+</table>
+</font>
+<br/>
+
+

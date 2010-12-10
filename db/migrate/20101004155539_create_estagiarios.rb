@@ -1,7 +1,8 @@
 class CreateEstagiarios < ActiveRecord::Migration
   def self.up
     create_table :estagiarios do |t|
-      t.references :unidade, :null => false
+      t.references :unidade
+      t.references :regiao
       t.string :nome
       t.string :RG
       t.string :CPF

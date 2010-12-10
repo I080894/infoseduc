@@ -1,0 +1,55 @@
+
+ <table  align="center" width="100%">
+  <td>
+  <fieldset><legend><font  size=5> Cadastrados</font></legend>
+   <br/>
+   <div class="botao">
+   <table width="100%">
+    <tr>
+      <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+     <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+   </tr>
+  </table>
+  <br/>
+  </div>
+    <font  size="2">
+    <table border="2" width="100%">
+      <%$datashow = 0%>
+     <% for datashow in @datashows %>
+      <tr>
+        <th bgcolor="gray">Unidade</th>
+        <th bgcolor="gray">Quantidade</th>
+        <th bgcolor="gray">Configuração</th>
+        <th bgcolor="gray">Pertence</th>
+     </tr>
+      <tr>
+       <td><%=h datashow.unidade.nome %></td>
+       <td><%=h datashow.quant %></td>
+       <td><%=h datashow.config %></td>
+       <td><%=h datashow.pertence %></td>
+     </tr>
+       <%$datashow = $datashow + datashow.quant%>
+    <tr>
+      <td colspan="7">
+        <div class="botao">
+        <table>
+           <td><%= button_to('Exibir',{:action => "show", :id =>datashow}, :method => "get") %></td>
+           <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
+            <td> <%= button_to('Editar',{:action => "edit", :id =>datashow}, :method => "get") %></td>
+            <% if current_user.has_role?('administrador')%>
+                <td><%= button_to('Excluir',{:action => "destroy", :id =>datashow}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+             <%end%>
+           <%end%>
+        </table>
+        </div>
+       </td>
+    </tr>
+    <% end %>
+    <tr>
+       <td align="left"colspan="7"><font color="black">Total de Datashow  => <%=  $datashow%></font></td>
+    </tr>
+   </table>
+   </font>
+  </fieldset>
+  </table>
+

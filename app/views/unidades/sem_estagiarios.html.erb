@@ -1,14 +1,11 @@
 <br/>
  <table  align="center" width="100%">
   <td>
-  <fieldset><legend><font  size=5> UNIDADES SEM ESTAGIAÁRIO</font></legend>
+  <fieldset><legend><font  size=5> UNIDADES SEM ESTAGIÁRIO</font></legend>
    <br/>
    <div class="botao">
    <table width="100%" align="center">
     <tr>
-     <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
-       <td width="8%"><%= button_to 'Cadastrar', new_unidade_path %></td>
-     <%end%>
      <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
       <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
      
@@ -32,8 +29,9 @@
   </div>
     <font  size="2">
     <table border="2" width="100%">
-     
-    
+     <% for unidadesem in @sem_estagiarios %>
+     <%if unidadesem.estagiarioE == 0%>
+     <%if unidadesem.nome != 'PATRIMÔNIO'%>
      <tr>
        <th bgcolor="gray">Nome</th>
        <th bgcolor="gray">Ensino</th>
@@ -46,8 +44,9 @@
        <th bgcolor="gray">Coordenador</th>
 
      </tr>
-   <% for unidadesem in @sem_estagiarios %>
+
      <tr>
+
        <td><%=h unidadesem.nome %></td>
        <td><%=h unidadesem.tipo.nome %></td>
        <td><%=h unidadesem.endereco %></td>
@@ -68,7 +67,8 @@
         </div>
        </td>
     </tr>
-    
+    <%end%>
+    <%end%>
     <% end %>
    </table>
    </font>
@@ -77,13 +77,11 @@
   <div class="botao">
    <table width="100%" align="center">
     <tr>
-      <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
-          <td width="8%"><%= button_to 'Cadastrar', new_unidade_path %></td>
-      <%end%>
       <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
       <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
 
   </table>
   </div>
+  <br/>
 
    

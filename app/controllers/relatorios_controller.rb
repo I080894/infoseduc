@@ -8,7 +8,7 @@ class RelatoriosController < ApplicationController
 
 def load_unidades
     
-  @unidades = Unidade.find(:all, :joins => :tipo, :conditions =>  ["tipos.nome=?","CRECHE"], :order => 'nome ASC')
+  @unidades = Unidade.find(:all, :conditions =>  ["nome like ?", "REGIÃO%" ], :order => 'nome ASC')
 
   end
 

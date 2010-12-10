@@ -9,11 +9,11 @@ class CreateChamados < ActiveRecord::Migration
       t.string :problema
       t.datetime :data_aten
       t.references :estagiario
-      t.references :tipo_problema
+      t.references :tipos_problema
       t.integer :patrimonio
       t.string :local
       t.string :procedimentos
-      t.references :situacao_chamado
+      t.references :situacao_chamado, :default => 1
       t.datetime :data_enc
       t.string :local
       t.string :obs

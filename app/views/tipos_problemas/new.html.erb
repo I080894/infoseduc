@@ -17,20 +17,19 @@
                      :url => { :action => 'lista' } %>
             </td>
           </tr>
-          <tr>
-             <td align="left" width="1%">
-                 <div class="botao">
-                    <%= f.submit "Salvar" %>
-                 </div>
-            </td>
-             <td align="left" width="1%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
-             <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+           <tr>
+             <div class="botao">
+               <td align="left" width="1%"><%= f.submit "Salvar" %></td>
+               <% end %>
+               <td align="left" width="1%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+               <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+             </div>
           </tr>
          </table>
         </fieldset>
-      <% end %>
+
      </td>
-     <td width="50%" align="">
+     <td width="50%" valign="top">
          <fieldset><legend><font  size=4> Tipos Problemas Cadastrados</font></legend>
           <table width="100%">
            <tr>
@@ -46,18 +45,8 @@
 
 </font>
 </fieldset>
-<table>
-  <tr>
-    <td colspan="12">
-       <div class="botao">
-        <table>
-           <td align="left" width="6%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
-           <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
-        </table>
-        </div>
-    </td>
-  </tr>
-</table>
+<br/>
+
 
 
 

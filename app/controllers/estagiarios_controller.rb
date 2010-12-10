@@ -6,6 +6,17 @@ class EstagiariosController < ApplicationController
    before_filter :load_unidades
    before_filter :load_estagiarios
    before_filter :load_analistas
+   before_filter :load_estagiariosa
+   before_filter :load_regiaos
+
+def load_regiaos
+    @regiaos = Regiao.find(:all)
+end
+
+def load_estagiariosa
+    @estagiariosa = Estagiario.find(:all, :order => 'nome ASC',:conditions => ['flag=? and desligado=?',0,0])
+end
+
 
 def load_analistas
     @analistas = Estagiario.find(:all, :order => 'nome ASC', :conditions => ['flag=?',1])
@@ -21,14 +32,11 @@ def load_estagiarios
   
   def index
    if (params[:search].nil? || params[:search].empty?)
-      
       @estagiarios = Estagiario.paginate :page => params[:page], :conditions =>['desligado=?',0], :order => 'nome ASC', :per_page => 16
       $var = 0
     else
-      @estagiarios = Estagiario.find(:all, :conditions => ["nome like ?", "%" + params[:search].to_s + "%" ], :order => 'nome ASC')
-
-      
-      $var = 1
+      @estagiarios = Estagiario.find(:all, :conditions => (["nome like ?", "%" + params[:search].to_s + "%" ]), :order => 'nome ASC')
+       $var = 1
     end
     respond_to do |format|
       format.html # index.html.erb
@@ -136,7 +144,7 @@ def load_estagiarios
   end
 
  def consulta
-    render :partial => 'consultas'
+    render 'consultas'
   end
 
 def lista_estagiario
@@ -146,8 +154,13 @@ def lista_estagiario
   end
 
 def analistas
-      @analistas = Estagiario.find(:all, :order => 'nome ASC', :conditions => ['flag=?',1])
-
+     if (params[:search].nil? || params[:search].empty?)
+       @analistas = Estagiario.paginate :page => params[:page], :conditions =>['flag=?',1], :order => 'nome ASC', :per_page => 10
+      $var = 0
+    else
+      @analistas = Estagiario.find(:all, :conditions => (["nome like ? and flag=?", "%" + params[:search].to_s + "%",1 ]), :order => 'nome ASC')
+       $var = 1
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @analistas }
@@ -155,11 +168,46 @@ def analistas
   end
 
 def baixas
-      @baixas = Estagiario.find(:all, :order => 'nome ASC', :conditions => ['desligado=?',1])
+  if (params[:search].nil? || params[:search].empty?)
+     @baixas = Estagiario.find(:all, :order => 'nome ASC', :conditions => ['desligado=?',1])
+      $var = 0
+    else
+      @baixas = Estagiario.find(:all, :conditions => ["nome like ? and desligado = 1","%" + params[:search].to_s + "%"], :order => 'nome ASC')
+       $var = 1
+    end
+    # @baixas = Estagiario.find(:all, :order => 'nome ASC', :conditions => ['desligado=?',1])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @analistas }
     end
   end
+
+def seleciona
+    $periodo = params[:estagiario_periodo_trab]
+    if ($periodo == 'ITINERANTE')then
+       render :partial => 'selecao_regiaos'
+    else
+       @unidades= Unidade.find(:all, :conditions => "regiao_id is null")
+       render :partial => 'selecao_unidades'
+    end
+  end
+
+ def regiao_unidade
+   $regiao = params[:estagiario_regiao_id]
+   if ($regiao == 6) then
+     @unidades = Unidade.find(:all)
+      render :update do |page|
+        page.replace_html 'selecao', :partial => 'selecao_unidades'
+    end
+     
+   else
+     @unidades = Unidade.find :all, :conditions => {:regiao_id => params[:estagiario_regiao_id]}
+      render :update do |page|
+       page.replace_html 'selecao', :partial => 'selecao_unidades'
+    end
+   end
+end
+
+  
 
 end

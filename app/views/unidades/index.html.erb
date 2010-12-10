@@ -6,9 +6,6 @@
    <div class="botao">
    <table width="100%" align="center">
     <tr>
-     <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
-       <td width="8%"><%= button_to 'Cadastrar', new_unidade_path %></td>
-     <%end%>
      <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
       <td width="8%" align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
       <% if  $var == 0 then %>
@@ -19,7 +16,7 @@
          <table>
         <tr>
         <% form_tag unidades_path, :method => 'get' do %>
-        <td align="right"><font size="4"> Digite Unidade:</font>
+        <td align="right"><font size="4"> Digite unidade:</font>
            <%= text_field_tag :search, params[:search] %>
            <%= submit_tag "Filtrar", :name => nil %>
         </td>
@@ -34,6 +31,7 @@
   </div>
     <font  size="2">
     <table border="2" width="100%">
+     <% for unidades in @unidades %>
       <tr>
        <th bgcolor="gray">Nome</th>
        <th bgcolor="gray">Ensino</th>
@@ -41,12 +39,8 @@
        <th bgcolor="gray">Num</th>
        <th bgcolor="gray">Bairro</th>
        <th bgcolor="gray">Fone</th>
-       <th bgcolor="gray">Email</th>
-       <th bgcolor="gray">Diretor</th>
-       <th bgcolor="gray">Coordenador</th>
+      </tr>
 
-     </tr>
-     <% for unidades in @unidades %>
      <tr>
        <td><%=h unidades.nome %></td>
        <td><%=h unidades.tipo.nome %></td>
@@ -54,21 +48,88 @@
        <td><%=h unidades.num %></td>
        <td><%=h unidades.bairro %></td>
        <td><%=h unidades.fone %></td>
+
+    </tr>
+    <tr>
+       <%if (unidades.estagiarioE == 1) then%>
+          <th></th>  
+          <th bgcolor="gray">Itinerância</th>
+       <%else%>
+           <th colspan="2"rowspan="2">
+       <%end%>
+       <th bgcolor="gray">Email</th>
+       <th bgcolor="gray">Diretor</th>
+       <th bgcolor="gray">Coordenador</th>
+       <th bgcolor="gray">Estagiário</th>
+
+    </tr>
+    <tr>
+      <%if (unidades.estagiarioE == 1) then%>
+          <th></th>
+          <% if unidades.regiao_id.nil? then %>
+         <%else%>
+           <td><%=h unidades.regiao.regiao %></td>
+          <%end%>
+       <%else%>
+      
+       <%end%>
        <td><%=h unidades.email %></td>
        <td><%=h unidades.diretor %></td>
        <td><%=h unidades.coordenador %></td>
+       <td>
 
+
+       <%if (unidades.estagiarioE == 1) then%>
+        <% unidades.regiao.estagiarios.each do |est| %>
+           <% if (est.desligado == 0 and est.periodo_trab == 'ITINERANTE') then%>
+             <%=h est.nome %> (Itinerante)<br/>
+          <%end%>
+        <%end%>
+     <%else%>
+     <%if (unidades.estagiarioM == 1) then%>
+       <% unidades.estagiarios.each do |est| %>
+           <% if (est.desligado == 0 and est.periodo_trab == 'MATUTINO') then%>
+             <%=h est.nome %> (mantutino)<br/>
+          <%end%>
+        <%end%>
+       <%else%>
+             Unidade sem estagiário Matutino <br/>
+       <%end%>
+
+      <%if (unidades.estagiarioV == 1) then%>
+       <% unidades.estagiarios.each do |est| %>
+           <% if (est.desligado == 0 and est.periodo_trab == 'VESPERTINO') then%>
+             <%=h est.nome %> (vespertino) <br/>
+          <%end%>
+        <%end%>
+       <%else%>
+             Unidade sem estagiário Vespertino <br/>
+       <%end%>
+   <%end%>
+
+
+
+
+
+
+
+
+
+
+
+       </td>
     </tr>
+
     <tr>
       <td colspan="12">
         <div class="botao">
         <table>
            <td><%= button_to('Exibir',{:action => "show", :id =>unidades}, :method => "get") %></td>
            <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
-             <td> <%= button_to('Editar',{:action => "edit", :id =>unidades}, :method => "get") %></td>
-             <% if current_user.has_role?('administrador')%>
-               <td><%= button_to('Excluir',{:action => "destroy", :id =>unidades}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
-             <%end%>
+              <td> <%= button_to('Editar',{:action => "edit", :id =>unidades}, :method => "get") %></td>
+                 <% if current_user.has_role?('administrador')%>
+                   <td><%= button_to('Excluir',{:action => "destroy", :id =>unidades}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+                 <%end%>
            <%end%>
         </table>
         </div>
@@ -82,9 +143,6 @@
   <div class="botao">
    <table width="100%" align="center">
     <tr>
-      <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
-          <td width="8%"><%= button_to 'Cadastrar', new_unidade_path %></td>
-      <%end%>
       <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
       <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
       <% if  $var == 0 then %>
@@ -93,5 +151,6 @@
 
   </table>
   </div>
+  <br/>
 
    

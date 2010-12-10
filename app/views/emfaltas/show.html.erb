@@ -1,0 +1,43 @@
+<br/>
+<br/>
+<table width="50%"align="center">
+<tr>
+<td>
+<fieldset><legend><font  size=5> ESTOQUE INFORMÁTICA</font></legend>
+<font  size="2">
+<table width="100%">
+  <tr>
+    <td width="10%" align="left"><b>Componente:</b></td>
+    <td align="left"><%=h @emfaltas.componente.nome %></td>
+  </tr>
+  <tr>
+     <td align="left"><b>Especificação:</b></td>
+     <td align="left"><%=h @emfaltas.especifica%>
+  </tr>
+  <tr>
+    <td align="left"><b> Quantidade:</b></td>
+    <td align="left"> <%=h @emfaltas.quant%>
+  </tr>
+  <tr>
+    <td align="left"><b>Observação:</b></td>
+    <td align="left"><%=h @emfaltas.obs %></td>
+  </tr>
+  <div class="botao">
+     <table>
+      <tr>
+       <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+       <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+      </tr>
+    </table>
+   </div>
+
+
+ </table>
+ </font>
+</fieldset>
+
+</td>
+</tr>
+</table>
+<br/>
+

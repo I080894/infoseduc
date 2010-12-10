@@ -6,7 +6,12 @@ class UnidadesController < ApplicationController
    before_filter :load_estagiarios
    before_filter :load_tipos
    before_filter :load_sem_estagiarios
+   before_filter :load_regiaos
 
+def load_regiaos
+    @regiaos = Regiao.find(:all, :order => 'regiao ASC')
+  end
+  
 def load_sem_estagiarios
     @sem_estagiario =Unidade.find(:all, :order => 'nome ASC')
   end
@@ -142,9 +147,8 @@ def mesmo_nome
 
 
 def consulta
-    render :partial => 'consultas'
+    render 'consultas'
   end
-
 
 def lista_unidade
     $unidade = params[:unidade_unidade_id]
@@ -152,10 +156,20 @@ def lista_unidade
     render :partial => 'lista_unidades'
   end
 
+def consultatipo
+    render 'consultastipo'
+  end
+
+def lista_tipo
+    $tipo = params[:unidade_tipo_id]
+    @tipos = Unidade.find(:all, :conditions => ['tipo_id=' + $tipo])
+    render :partial => 'lista_tipos'
+  end
+
 def sem_estagiarios
       #@sem_estagiarios = Unidade.find(:all, :order => 'nome ASC')
-      @sem_estagiarios = Unidade.find(:all, :joins => :estagiarios, :conditions => ["estagiarios.desligado",0], :order => 'nome ASC')
-      
+      @sem_estagiarios = Unidade.find(:all, :conditions => ["estagiarioV=0 or estagiarioM=0"], :order => 'nome ASC')
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @sem_estagiarios }

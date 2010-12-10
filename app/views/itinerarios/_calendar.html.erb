@@ -6,7 +6,7 @@
       <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m-%d"), :search => params[:search] %>
     </h2>
     <% calendar_for @itinerante, :year => @date.year, :month => @date.month, :search => params[:search] do |calendar| %>
-      <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
+      <%= calendar.head('Domnigo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado') %>
       <% calendar.day(:day_method => :data_visita) do |date, articles| %>
         <%= date.day %>
         <ul>

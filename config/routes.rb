@@ -1,52 +1,33 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :itinerarios
+  map.resources :emprestimos
 
-  map.resources :chamados
+  map.resources :regiaos
 
-  map.resources :situacao_chamados
-
-  map.resources :tipos_problemas
-
-  map.resources :fornecedores
-
-  map.resources :componentes
-
-  map.resources :relatorios
-
-  map.resources :saidas
-
-  map.resources :entradas
-
-  map.resources :estoques
-
-  map.resources :senhas
-
-  map.resources :tipos
-
-  map.resources :seducs
-
-  map.resources :departamentos
-
-  map.resources :seduc
-
-  map.resources :administracaos
-
-  map.resources :laboratorios
-
-  map.resources :estagiarios
-
+  map.resources :emfaltas
+  map.resources :tipo_controles
+  map.resources :datashows
   map.resources :impressoras
-  
   map.resources :computadores
-
+  map.resources :itinerarios
+  map.resources :chamados
+  map.resources :situacao_chamados
+  map.resources :tipos_problemas
+  map.resources :fornecedores
+  map.resources :componentes
+  map.resources :relatorios
+  map.resources :saidas
+  map.resources :entradas
+  map.resources :estoques
+  map.resources :senhas
+  map.resources :tipos
+  map.resources :departamentos
+  map.resources :seduc
+  map.resources :administracaos
+  map.resources :estagiarios
   map.resources :unidades
-
   map.resources :users
-
   map.resource :session
-
   map.resources :roles_users
-  
   map.resources :homes
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -88,6 +69,23 @@ ActionController::Routing::Routes.draw do |map|
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
   map.resources :fornecedores
+  map.c_datashow_uni '/c_datashow_uni', :controller => 'datashows', :action => 'consulta'
+  map.c_imp_tpuni '/c_imp_tpuni', :controller => 'impressoras', :action => 'consultatiponome'
+  map.c_imp_tp '/c_imp_tp', :controller => 'impressoras', :action => 'consultatipo'
+  map.c_imp_uni '/c_imp_uni', :controller => 'impressoras', :action => 'consulta'
+  map.c_comp_tpuni '/c_comp_tpuni', :controller => 'computadores', :action => 'consultatiponome'
+  map.c_comp_tp '/c_comp_tp', :controller => 'computadores', :action => 'consultatipo'
+  map.c_comp_uni '/c_comp_uni', :controller => 'computadores', :action => 'consulta'
+  map.c_adm_tpuni '/c_adm_tpuni', :controller => 'administracaos', :action => 'consultatiponome'
+  map.c_adm_tp '/c_adm_tp', :controller => 'administracaos', :action => 'consultatipo'
+  map.c_adm_uni '/c_adm_uni', :controller => 'administracaos', :action => 'consulta'
+  map.c_est_nom '/c_est_nom', :controller => 'estagiarios', :action => 'consulta'
+  map.c_uni_tp '/c_uni_tp', :controller => 'unidades', :action => 'consultatipo'
+  map.c_uni_uni '/c_uni_uni', :controller => 'unidades', :action => 'consulta'
+  map.totalizaS '/totalizaS', :controller => 'datashows', :action => 'totalizaS'
+  map.totalizaI '/totalizaI', :controller => 'impressoras', :action => 'totalizaI'
+  map.totalizaC '/totalizaC', :controller => 'computadores', :action => 'totalizaC'
+  map.encerrados '/cencerrados', :controller => 'chamados', :action => 'encerrados'
   map.consulta '/consultas', :controller => 'fornecedores', :action => 'consulta'
   map.sem_estagiario '/sem_estagiario', :controller => 'unidades', :action => 'sem_estagiarios'
   map.baixas '/baixas', :controller => 'estagiarios', :action => 'baixas'

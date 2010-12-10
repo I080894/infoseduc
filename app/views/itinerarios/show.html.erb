@@ -1,18 +1,39 @@
-<p>
-  <b>Estagiario:</b>
-  <%=h @itinerario.estagiario.nome %>
-</p>
+<br/>
+<table width="50%"align="center">
+<tr>
+<td>
+<fieldset><legend><font  size=5> ROTEIRO CADASTRADO</font></legend>
+<table width="100%">
+  <tr>
+    <td align="left"><font size=2><b>Estagiário:</b></font></td>
+    <td align="left"><font size=2><%=h @itinerario.estagiario.nome %></font></td>
+  </tr>
+  <tr>
+    <td align="left"><font size=2><b>Unidade:</b></font></td>
+    <td align="left"><font size=2><%=h @itinerario.unidade.nome %></font></td>
+  </tr>
+  <tr>
+    <td align="left"><font size=2><b>Data Visita:</b></font></td>
+    <td align="left"><font size=2><%=h @itinerario.data_visita.strftime("%d/%m/%Y") %></font></td>
+  </tr>
+  <tr>
+    <td align="left"><font size=2><b>Observações:</b></font></td>
+    <td align="left"><font size=2><%=h @itinerario.obs %></font></td>
+  </tr>
+  <table>
+  <tr>
+     <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+     <% if current_user.has_role?('administrador') %>
+        <td align="left" width="8%"> <%= button_to('Editar', {:action => "edit", :id => @itinerario}, :method => "get") %></td>
+        <td align="left" width="8%"><%= button_to('Excluir',{:action => "destroy", :id =>@itinerario}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+    <%end%>
+     <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+    </tr>
+  </table>
+ </table>
+</fieldset>
+</td>
+</tr>
+</table>
+<br/>
 
-<p>
-  <b>Unidade:</b>
-  <%=h @itinerario.unidade.nome %>
-</p>
-
-<p>
-  <b>Data visita:</b>
-  <%=h @itinerario.data_visita.strftime("%d/%m/%Y") %>
-</p>
-
-
-<%= link_to 'Alterar', edit_itinerario_path(@itinerario) %> |
-<%= link_to 'Voltar', itinerarios_path %>

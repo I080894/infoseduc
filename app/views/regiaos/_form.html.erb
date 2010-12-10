@@ -1,0 +1,35 @@
+      <% form_for(@regiaos) do |f| %>
+        <fieldset><legend><font  size=4> Cadastro Regiões Etinerância</font></legend>
+         <table>
+           <tr>
+             <td width="20%"align="left"><b>Região:</b></td>
+             <td colspan="2"align="left">   <%= f.text_field :regiao, :size=>31 %></td>
+                   <%= observe_field 'regiao_regiao',
+                      :frequency => 0.1,
+                      :update => "cadastrados",
+                      :with => :regiao_regiao,
+                     :url => { :action => 'lista' } %>
+
+          </tr>
+          <tr>
+            <td width="20%"align="left" valign="top"><b>Localidades:</b></td>
+            <td colspan="2"align="left"><%= f.text_area(:local, :cols =>40, :rows => "2") %></td>
+          </tr>
+          <tr>
+            <td width="20%"align="left" valign="top"><b>Unidades:</b></td>
+            <td colspan="2"align="left"><%= f.text_area(:unidade, :cols =>40, :rows => "2") %></td>
+          </tr>
+          <tr>
+             <td width="20%" align="left" valign="top"><b>Observações:</b></td>
+             <td colspan="2"align="left"><%= f.text_area(:obs, :cols =>40, :rows => "2") %></td>
+          </tr>
+          <tr>
+            <div class="botao">
+               <td align="right" width="1%" ><%= f.submit "Salvar" %></td>
+               <% end %>
+               <td align="left" width="1%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+               <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+            </div>
+          </tr>
+         </table>
+        </fieldset>

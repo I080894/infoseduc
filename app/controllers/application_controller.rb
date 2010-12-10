@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
 end
-PERIODO = {'MATUTINO' => 'MATUTINO',  'VESPERTINO' => 'VESPERTINO', 'NOTURNO' => 'NOTURO','DESLIGADO' => 'DESLIGADO'}
+PERIODO = {'MATUTINO' => 'MATUTINO',  'VESPERTINO' => 'VESPERTINO', 'NOTURNO' => 'NOTURO'}
+PERIODOT = {'MATUTINO' => 'MATUTINO',  'VESPERTINO' => 'VESPERTINO', 'ITINERANTE' => 'ITINERANTE'}
 SOLICITACAO = {'TELEFONE' => 'TELEFONE',  'E-MAIL' => 'E-MAIL', 'INTERNET' => 'INTERNET','PESSOALMENTE' => 'PESSOALMENTE', 'TERCEIROS'=> 'TERCEIROS', 'OUTROS'=>'OUTROS'}
 LOCAL = {'IN-LOCU' => 'IN-LOCU',  'INFORMATICA' => 'INFORMATICA', 'OUTROS'=>'OUTROS'}

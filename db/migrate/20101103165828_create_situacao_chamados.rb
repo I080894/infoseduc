@@ -5,6 +5,13 @@ class CreateSituacaoChamados < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    SituacaoChamado.create :situacao => 'EM ABERTO'
+    SituacaoChamado.create :situacao => 'ENCERRADO'
+    SituacaoChamado.create :situacao => 'AGUARDANDO COMPRAS'
+    SituacaoChamado.create :situacao => 'AGUARDANDO MOTORISTA'
+    SituacaoChamado.create :situacao => 'SERVIÇO DE TERCEIROS'
+    
   end
 
   def self.down

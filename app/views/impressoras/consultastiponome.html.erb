@@ -1,0 +1,47 @@
+<br/><br/><br/><br/>
+<table  align="center" width="60%">
+<td>
+ <fieldset><legend><font  size=4>IMPRESSORAS - CONSULTA EXPECÍFICA</font></legend>
+   <br/>
+   <table>
+    <tr>
+      <td>
+        <div class="botao">
+        <table>
+          <tr>
+             <td align="left"><font size="4">Pertence</font></td>
+             <td colspan="3" align="left"><%= collection_select :impressora, :tipo_controle_id, @tipo_controles, :id, :nome, :include_blank => ' -- Selecione -- '  %></td>
+                     <%= observe_field 'impressora_tipo_controle_id',
+                        :frequency => 0.2,
+                        :with   => 'impressora_tipo_controle_id',
+                        :url    => { :action => 'lista_tiponome' }%>
+          </tr>
+          <tr>
+              <td align="left"><font size="4">Unidade:</font></td>
+               <td colspan="3"align="left"><div id= 'esp_unidade'></div></td>
+  
+
+             
+          </tr>
+       </table>
+       </div>
+      </td>
+     </tr>
+    <tr>
+      <td>
+
+        <div id="listagem"> </div>
+     </td>
+   </tr>
+      <div class="botao">
+       <table width="100%">
+        <tr>
+           <td align="left" width="8%" ><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+           <td align="left" ><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+        </tr>
+      </table>
+     </div>
+    </table>
+ </fieldset>
+</table>
+<br/>

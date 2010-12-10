@@ -4,7 +4,7 @@
  <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <title>Controle de Inscrições: <%= controller.action_name %></title>
-    <%= stylesheet_link_tag 'scaffold' %>
+
     <%= stylesheet_link_tag 'infoseduc', 'calendar' %>
     <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css"%>
     <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "application" %>
@@ -26,6 +26,7 @@ display: none;
     <div id="topo">
       <br/><br/><br/><br/>
       <h4 align="right"><font   size ="2"> Americana <%= Time.now.strftime("%d de %B de %Y") %></font></h4>
+      
     </div>
 
     <div class="botao">
@@ -33,13 +34,17 @@ display: none;
           <font size="4" color="green"><%= link_to h(current_user.login.capitalize), user_path(current_user) %> </font>
             <% if current_user.has_role?('administrador') %>
               Acesso de Administrador do Sistema
-              <%else%>
+            <%else%>
               <% if current_user.has_role?('estagiario SEDUC') %>
                   Acesso de Estagiário(a)- SEDUC
-                <%else%>
-                  Acesso de  Estagiário(a) etinerante
-                <%end%>
-             <%end%>
+                  <%else%>
+                    <% if current_user.has_role?('estagiario itinerante') %>
+                       Acesso de  Estagiário(a) itinerante
+                    <%else%>
+                         Acesso de  Estagiário(a) unidade
+                  <%end%>
+               <%end%>
+            <%end%>
           <font style="color: red"><%= flash[:notice] %></font>
         <%else%>
            <%= link_to '|Entrar|', login_path %>
@@ -47,7 +52,7 @@ display: none;
         <%end%>
       <div id="menu">
 
-
+        <br/>
          <span class="preload1"></span>
          <span class="preload2"></span>
          <ul id="nav">
@@ -65,8 +70,9 @@ display: none;
                <li><%= link_to "Cadastrados", unidades_path%></li>
                <li><a href="#nogo29" class="fly">Consultar</a>
                    <ul>
-                     <li><%= link_to_remote('Unidades', :update => "tela", :url => { :action => "consulta", :controller => 'unidades'}) %></li>
-                     <% if current_user.has_role?('administrador') %>
+                     <li><%= link_to('por Nome', c_uni_uni_path) %></li>
+                     <li><%= link_to('por Tipo', c_uni_tp_path) %></li>
+                      <% if current_user.has_role?('administrador') %>
                          <li><%= link_to 'S/Estagiario', sem_estagiario_path %></li>
                      <%end%>
                    </ul>
@@ -76,15 +82,15 @@ display: none;
 
            <li class="top"><a href="#nogo27" id="funcionarios" class="top_link"><span class="down">Funcionários</span></a>
             <ul class="sub">
-              <li><a href="#nogo29" class="fly">Estagiaŕios</a>
+              <li><a href="#nogo29" class="fly">Estagiários</a>
                    <ul>
                      <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
                        <li><%= link_to 'Cadastrar',new_estagiario_path %></li>
                      <%end%>
-                     <li><%= link_to 'Cadastrados', estagiarios_path%> </li>
+                     <li><%= link_to 'Cadastrados', c_est_nom_path %></li>
                      <li><a href="#nogo29" class="fly">Consultar</a>
                      <ul>
-                        <li><%= link_to_remote('Atuais', :update => "tela", :url => { :action => "consulta", :controller => 'estagiarios'}) %></li>
+                        <li><%= link_to 'Atuais', estagiarios_path%> </li>
                           <% if current_user.has_role?('administrador') %>
                            <li><%= link_to 'Baixados',baixas_path %></li>
                           <%end%>
@@ -97,35 +103,68 @@ display: none;
             </li>
            <li class="top"><a href="#nogo2" id="equipamentos" class="top_link"><span class="down">Equipamentos</span></a>
              <ul class="sub">
-               <li><a href="#nogo29" class="fly">Laboratório</a>
+               <li><a href="#nogo29" class="fly">Rede/Internet</a>
                    <ul>
-                      <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC')  or current_user.has_role?('estagiario etinerante')%>
-                        <li><%= link_to 'Cadastrar',new_laboratorio_path  %></li>
+                     <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC')  or current_user.has_role?('estagiario itinerante') %>
+                       <li><%= link_to 'Cadastrar',new_administracao_path %></li>
+                     <%end%>
+                     <li><%= link_to 'Cadastrados', administracaos_path %></li>
+                     <li><a href="#nogo29" class="fly">Consultar</a>
+                      <ul>
+                        <li><%= link_to 'por Unidade', c_adm_uni_path %></li>
+                        <li><%= link_to 'por Pertence', c_adm_tp_path %></li>
+                        <li><%= link_to 'Específica',  c_adm_tpuni_path %></li>
+                      </ul>
+                    </ul
+                     
+                     
+                </li>
+              <li><a href="#nogo29" class="fly">Computadores</a>
+                   <ul>
+                      <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC')  or current_user.has_role?('estagiario itinerante')%>
+                        <li><%= link_to 'Cadastrar',new_computadore_path  %></li>
                       <%end%>
-                      <li><%= link_to 'Cadastrados', laboratorios_path%></li>
-                      <li><%= link_to_remote('Consultar', :update => "tela", :url => { :action => "consulta", :controller => 'laboratorios'}) %></li>
+                      <li><%= link_to 'Cadastrados', computadores_path%></li>
+                     <li><a href="#nogo29" class="fly">Consultar</a>
+                        <ul>
+                        <li><%= link_to 'por Unidade', c_comp_uni_path %></li>
+                        <li><%= link_to 'por Pertence', c_comp_tp_path %></li>
+                        <li><%= link_to 'Específica',  c_comp_tpuni_path %></li>
+                       </ul>
+                       <li><%= link_to 'Totalização', totalizaC_path %></li>
                     </ul>
                 </li>
-                <li><a href="#nogo29" class="fly">Administração</a>
+                <li><a href="#nogo29" class="fly">Impressoras</a>
                    <ul>
-                      <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC')  or current_user.has_role?('estagiario etinerante') %>
-                         <li><%= link_to 'Cadastrar',new_administracao_path %></li>
+                      <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC')  or current_user.has_role?('estagiario itinerante')%>
+                        <li><%= link_to 'Cadastrar',new_impressora_path  %></li>
                       <%end%>
-                      <li><%= link_to 'Cadastrados', administracaos_path %></li>
-                      <li><%= link_to_remote('Consultar', :update => "tela", :url => { :action => "consulta", :controller => 'administracaos'}) %></li>
+                      <li><%= link_to 'Cadastrados', impressoras_path%></li>
+                       <li><a href="#nogo29" class="fly">Consultar</a>
+                          <ul>
+                            <li><%= link_to 'por Unidade', c_imp_uni_path %></li>
+                            <li><%= link_to 'por Pertence', c_imp_tp_path %></li>
+                            <li><%= link_to 'Específica',  c_imp_tpuni_path %></li>
+                            </ul>
+                       </li>
+                        <li><%= link_to 'Totalização', totalizaI_path %></li>
                     </ul>
                 </li>
-                <% if current_user.has_role?('administrador')  or current_user.has_role?('estagiario SEDUC') %>
-                <li><a href="#nogo29" class="fly">SEDUC</a>
+                <li><a href="#nogo29" class="fly">Data Show</a>
                    <ul>
-                      <li><%= link_to 'Cadastrar',new_seduc_path %></li>
-                      <li><%= link_to 'Cadastrados', seducs_path %></li>
-                      <li><%= link_to_remote('Consultar',:update => "tela", :url => { :action => "consulta", :controller => 'seducs'}) %></li>
-                    </ul>
+                      <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC')  or current_user.has_role?('estagiario itinerante')%>
+                        <li><%= link_to 'Cadastrar',new_datashow_path  %></li>
+                      <%end%>
+                      <li><%= link_to 'Cadastrados', datashows_path%></li>
+                       <li><a href="#nogo29" class="fly">Consultar</a>
+                          <ul>
+                          <li><%= link_to 'por Unidade', c_datashow_uni_path %></li>
+                          </ul>
+                       </li>
+                        <li><%= link_to 'Totalização', totalizaS_path %></li>
+                   </ul>
                 </li>
-                <%end%>
-                <li><%= link_to 'Impressoras',impressoras_path%></li>
-                <li><%= link_to 'Computadores',computadores_path%></li>
+
              </ul>
            </li>
            <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
@@ -136,7 +175,7 @@ display: none;
                     <li><%= link_to "Tipo Unidade",new_tipo_path %></li>
                     <li><%= link_to "Tipo Problema",new_tipos_problema_path %></li>
                     <li><%= link_to "Departamento", new_departamento_path%></li>
-                    <li><%= link_to "Situação",new_situacao_chamado_path %></li>
+                    <!--<li><%= link_to "Situação",new_situacao_chamado_path %></li>-->
                     
                  </ul>
                </li>
@@ -202,11 +241,19 @@ display: none;
                  </ul>
                </li>
                <%end%>
+               <% if current_user.has_role?('administrador') %>
+                <li><a href="#nogo29" class="fly">Em Falta</a>
+                  <ul>
+                     <li><%= link_to "Cadastrar", new_emfalta_path%></li>
+                     <li><%= link_to "Consultar", emfaltas_path%></li>
+                  </ul>
+                </li>
+               <%end%>
            </ul>
           </li>
           <%end%>
-          <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario etinerante') %>
-           <li class="top"><a href="#nogo2" id="etinerancia" class="top_link"><span class="down">Etinerância</span></a>
+          <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario itinerante') %>
+           <li class="top"><a href="#nogo2" id="itinerancia" class="top_link"><span class="down">Itinerância</span></a>
             <ul class="sub">
 
               <li><a href="#nogo29" class="fly">Relatórios</a>
@@ -219,29 +266,40 @@ display: none;
                </li>
               <li><a href="#nogo29" class="fly">Roteiro</a>
                   <ul>
-                     <li><%= link_to "Cadastrar",new_itinerario_path %></li>
+                     <li><%= link_to "Consultar", itinerarios_path%></li>
                      <% if current_user.has_role?('administrador') %>
-                        <li><%= link_to "Consultar", itinerarios_path%></li>
+                        <li><%= link_to "Cadastrar",new_itinerario_path %></li>
                      <%end%>
                   </ul>
                </li>
 
-
-              <li><%= link_to 'Roteiro' %></li>
+            <% if current_user.has_role?('administrador') %>
+              <li><a href="#nogo29" class="fly">Regiões</a>
+                  <ul>
+                     <li><%= link_to "Cadastrar",new_regiao_path %></li>
+                     <li><%= link_to "Consultar", regiaos_path%></li>
+                  </ul>
+               </li>
+           <%end%>
             </ul>
            </li>
           <%end%>
-           <li class="top"><a href="#nogo2" id="servico" class="top_link"><span class="down">Ordem Serviço</span></a>
+           <li class="top"><a href="#nogo2" id="servico" class="top_link"><span class="down">Serviços</span></a>
             <ul class="sub">
-              <li><a href="#nogo29" class="fly">Ordem de serviço</a>
+              <li><a href="#nogo29" class="fly">Ordem Serviço</a>
                   <ul>
                      <li><%= link_to "Emissão",new_chamado_path %></li>
-                     <li><%= link_to "Em Aberto" %></li>
-                     <li><%= link_to "Ecerradas" %></li>
+                     <li><%= link_to "Em Aberto", chamados_path %></li>
+                     <li><%= link_to "Encerradas", encerrados_path  %></li>
                   </ul>
                </li>
-              <li><%= link_to 'Solicitação-Peças' %></li>
-              <li><%= link_to 'Solicitação-Visitas' %></li>
+               <li><a href="#nogo29" class="fly">Datashow</a>
+                  <ul>
+                     <li><%= link_to "Solicitação",new_emprestimo_path %></li>
+                     <li><%= link_to "Calendario", emprestimos_path %></li>
+                     
+                  </ul>
+               </li>
             </ul>
            </li>
          </ul>

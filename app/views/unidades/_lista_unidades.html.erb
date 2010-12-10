@@ -37,21 +37,49 @@
      </tr>
      <tr>
        <th rowspan="2" ></th>
-       <th bgcolor="gray" colspan="5">Estagiários</th>
-       </tr>
-     <tr>
-        <td colspan="5" align="left">
-             <%unidade.estagiarios.each do |est| %>
-               <% if (est.desligado == 0) then%>
-                  <%=h est.nome %>(<%=h est.periodo_trab%>)
-              <%else%>
-                 Unidade sem estagiário
-              <%end%>
-           <%end%>
-        </td>
+       <th bgcolor="gray" colspan="4">Estagiários</th>
+       <th bgcolor="gray">Região</th>
      </tr>
      <tr>
-        <td colspan="12">
+        <td colspan="4" align="left">
+       <%if (unidade.estagiarioE == 1) then%>
+        <% unidade.regiao.estagiarios.each do |est| %>
+           <% if (est.desligado == 0 and est.periodo_trab == 'ITINERANTE') then%>
+             <%=h est.nome %> (Itinerante)<br/>
+          <%end%>
+        <%end%>
+     <%else%>
+     <%if (unidade.estagiarioM == 1) then%>
+       <% unidade.estagiarios.each do |est| %>
+           <% if (est.desligado == 0 and est.periodo_trab == 'MATUTINO') then%>
+             <%=h est.nome %> (mantutino)<br/>
+          <%end%>
+        <%end%>
+       <%else%>
+             Unidade sem estagiário Matutino <br/>
+       <%end%>
+
+      <%if (unidade.estagiarioV == 1) then%>
+       <% unidade.estagiarios.each do |est| %>
+           <% if (est.desligado == 0 and est.periodo_trab == 'VESPERTINO') then%>
+             <%=h est.nome %> (vespertino) <br/>
+          <%end%>
+        <%end%>
+       <%else%>
+             Unidade sem estagiário Vespertino <br/>
+       <%end%>
+   <%end%>
+     </td>
+      <td>
+          <% if unidade.regiao_id.nil? then %>
+            Estagiário Fixo
+          <%else%>
+              <%=h unidade.regiao.regiao %></td>
+          <%end%>
+     </td>
+     </tr>
+     <tr>
+       <td colspan="12">
         <div class="botao">
         <table>
           <tr>
@@ -67,10 +95,9 @@
         </div>
        </td>
     </tr>
-    <% end %>
-   </font>
+   <% end %>
   </table>
-
+ </font>
 
 
 

@@ -1,15 +1,11 @@
-<br/>
+
  <table  align="center" width="100%">
   <td>
-  <fieldset><legend><font  size=5> EQUIPAMENTO CADASTRADOS ADMINISTRAÇÃO</font></legend>
-   <br/>
+  <fieldset><legend><font  size=5> Cadastrados</font></legend>
    <div class="botao">
    <table width="100%">
     <tr>
-     <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
-       <td align="left" width="8%"><%= button_to 'Cadastrar', new_laboratorio_path %></td>
-     <%end%>
-     <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
      <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
    </tr>
   </table>
@@ -17,65 +13,36 @@
   </div>
     <font  size="2">
     <table border="2" width="100%">
-      <% for administracaos in @administracao %>
+
+     <% for administracaos in @administracao %>
       <tr>
         <th bgcolor="gray">Unidade</th>
+         <th bgcolor="gray">Pertence</th>
         <th bgcolor="gray">Servidor</th>
         <th bgcolor="gray">Rede</th>
         <th bgcolor="gray">Internet</th>
         <th bgcolor="gray">Obs</th>
-        <th bgcolor="gray">Nº Comp</th>
-        <th bgcolor="gray">Configuração</th>
-        <th bgcolor="gray">Num imp seduc</th>
-        <th bgcolor="gray">Configuração</th>
       </tr>
       <tr>
 
        <td><%=h administracaos.unidade.nome %></td>
+       <td><%=h administracaos.tipo_controle.nome %></td>
        <td><%=h administracaos.servidor %></td>
        <td><%=h administracaos.rede %></td>
        <td><%=h administracaos.internet %></td>
        <td><%=h administracaos.obs %></td>
-       <td><%=h administracaos.num_comp_seduc %></td>
-       <td><%=h administracaos.config_comp_seduc %></td>
-       <td><%=h administracaos.num_imp_seduc %></td>
-       <td><%=h administracaos.config_imp_seduc %></td>
      </tr>
-
-
-      <tr>
-        <th></th>
-        <th bgcolor="gray">Nº Comp</th>
-        <th bgcolor="gray">Configuração</th>
-        <th bgcolor="gray">Pertence comp</th>
-        <th bgcolor="gray">Contato comp</th>
-        <th bgcolor="gray">Nº Imp</th>
-        <th bgcolor="gray">Configuração</th>
-        <th bgcolor="gray">Pertence</th>
-        <th bgcolor="gray">Contato</th>
-      </tr>
-      <tr>
-              <th></th>
-       <td><%=h administracaos.num_comp %></td>
-       <td><%=h administracaos.config_comp %></td>
-       <td><%=h administracaos.pertence_comp %></td>
-       <td><%=h administracaos.contato_comp %></td>
-       <td><%=h administracaos.num_imp %></td>
-       <td><%=h administracaos.config_imp %></td>
-       <td><%=h administracaos.pertence_imp %></td>
-       <td><%=h administracaos.contato_imp %></td>
-     </tr>
-
-
 
     <tr>
-      <td colspan="12">
+      <td colspan="6">
         <div class="botao">
         <table>
            <td><%= button_to('Exibir',{:action => "show", :id =>administracaos}, :method => "get") %></td>
           <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
             <td> <%= button_to('Editar',{:action => "edit", :id =>administracaos}, :method => "get") %></td>
-            <td><%= button_to('Excluir',{:action => "destroy", :id =>administracaos}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+           <% if current_user.has_role?('administrador')%>
+               <td><%= button_to('Excluir',{:action => "destroy", :id =>administracaos}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+           <%end%>
           <%end%>
         </table>
         </div>
@@ -84,17 +51,5 @@
     <% end %>
    </table>
    </font>
-  </fieldset>
   </table>
-  <div class="botao">
-   <table width="100%">
-    <tr>
-      <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
-         <td width="8%"><%= button_to 'Cadastrar', new_administracao_path %></td>
-      <%end%>
-      <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
-    
-      <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
-    </tr>
-  </table>
-  </div>
+

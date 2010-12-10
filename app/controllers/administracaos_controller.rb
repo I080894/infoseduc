@@ -4,7 +4,12 @@ class AdministracaosController < ApplicationController
   layout "application"
    before_filter :load_unidades
    before_filter :load_administracaos
+   before_filter :load_tipocontroles
 
+
+   def load_tipocontroles
+    @tipo_controles = TipoControle.find(:all)
+  end
 
    def load_administracaos
     @administracaos = Administracao.find(:all)
@@ -29,6 +34,8 @@ class AdministracaosController < ApplicationController
       format.xml  { render :xml => @administracaos }
     end
   end
+
+  
 
   # GET /administracaos/1
   # GET /administracaos/1.xml
@@ -64,7 +71,7 @@ class AdministracaosController < ApplicationController
 
     respond_to do |format|
       if @administracaos.save
-        flash[:notice] = 'COMPONENTE CADASTRADO COM SUCESSO'
+        flash[:notice] = 'SALVO COM SUCESSO'
         format.html { redirect_to(@administracaos) }
         format.xml  { render :xml => @administracaos, :status => :created, :location => @administracaos }
       else
@@ -81,7 +88,7 @@ class AdministracaosController < ApplicationController
 
     respond_to do |format|
       if @administracaos.update_attributes(params[:administracao])
-        flash[:notice] = 'ACOMPONENTE SALVO COM SUCESSO.'
+        flash[:notice] = 'SALVO COM SUCESSO.'
         format.html { redirect_to(@administracaos) }
         format.xml  { head :ok }
       else
@@ -125,7 +132,7 @@ class AdministracaosController < ApplicationController
   end
 
 def consulta
-    render :partial => 'consultas'
+    render 'consultas'
   end
 
 
@@ -135,5 +142,33 @@ def lista_unidades
     render :partial => 'lista_unidades'
   end
 
+def consultatipo
+    render 'consultastipo'
+ end
+
+def consultatiponome
+    render 'consultastiponome'
+ end
+
+def lista_tipos
+    $tipo = params[:administracao_tipo_controle_id]
+    @administracao = Administracao.find(:all, :conditions => ['tipo_controle_id='+ $tipo])
+    render :partial => 'lista_unidades'
+  end
+
+def lista_tiponome
+   $tipo = params[:administracao_tipo_controle_id]
+   @unidade = Unidade.find :all, :conditions => {:tipo_id => params[:administracao_tipo_controle_id]}
+     render :update do |page|
+      page.replace_html 'esp_unidade', :partial => 'unidade_box'
+  end
+
+end
+
+def lista_tipounidades
+    $unidade = params[:administracao_unidade_id]
+    @administracao = Administracao.find(:all, :conditions => ['unidade_id=? and tipo_controle_id=?',$unidade, $tipo])
+    render :partial => 'lista_unidades'
+  end
 
 end

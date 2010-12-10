@@ -1,179 +1,110 @@
-<br/>
+
  <table  align="center" width="100%">
-  <tr>
   <td>
   <fieldset><legend><font  size=5> COMPUTADORES</font></legend>
    <br/>
-   <table align="center" width="100%">
-    <tr>
-      <td valign="top" width="20%">
-        <fieldset><legend><font  size=5> SEDUC</font></legend>
-         <br/><br/>
-         <table border="1" width="100%">
-         <%$totals = 0%>
-          <tr>
-             <th  valign="top" align="left" bgcolor="gray"><font  size="2">Departamento</font></th>
-             <th  valign="top" align="left" bgcolor="gray"><font  size="2">'Nº</font></th>
-
-          </tr>
-          <% for seduc in @seducs %>
-          <tr>
-
-             <td  valign="top"align="left"><font  size="2"><%=h seduc.departamento.depto %></font></td>
-             <td  valign="top"><font  size="2"><%=h seduc.num_comp %></font></td>
-             <%$totals= $totals + seduc.num_comp%>
-
-
-          </tr>
-
-          <tr>
-            <td colspan="12">
-             <div class="botao">
-              <table>
-               <td><%= button_to('Exibir',{:controller => "seducs",:action => "show", :id =>seduc}, :method => "get") %></td>
-              </table>
-             </div>
-           </td>
-          </tr>
-
-         <% end %>
-         <tr>
-            <td colspan="3" align="left"><font  size="2"><b> Total Computadores: <%= $totals %></b></font> </td>
-          </tr>
-        </table>
-       </fieldset>
-      </td>
-      <td valign="top" width="25%">
-        <fieldset><legend><font  size=5> Laboratórios</font></legend>
-         <br/><br/>
-         <table border="1" width="100%">
-         <%$totalC = 0%>
-          <tr>
-             <th  valign="top" align="left" bgcolor="gray"><font  size="2">Unidade</font></th>
-             <th  valign="top" align="left" bgcolor="gray"><font  size="2">'Nº</font></th>
-             
-          </tr>
-          <% for laboratorio in @laboratorios %>
-          <tr>
-            
-             <td  valign="top"align="left"><font  size="2"><%=h laboratorio.unidade.nome %></font></td>
-             <td  valign="top"><font  size="2"><%=h laboratorio.num_comp %></font></td>
-             <%$totalC = $totalC + laboratorio.num_comp%>
-             
-            
-          </tr>
-          
-          <tr>
-            <td colspan="12">
-             <div class="botao">
-              <table>
-               <td><%= button_to('Exibir',{:controller => "laboratorios",:action => "show", :id =>laboratorio}, :method => "get") %></td>
-              </table>
-             </div>
-           </td>
-          </tr>
-          
-         <% end %>
-         <tr>
-            <td colspan="3" align="left"><font  size="2"><b> Total de Computadores: <%= $totalC %></b></font> </td>
-          </tr>
-        </table> 
-       </fieldset>
-      </td>
-      <td  valign="top" width="55%">
-        <fieldset><legend><font  size=5> Administração</font></legend>
-         <%$totalC1 = 0%>
-         <table width="100%">
-           <tr><td  valign="top" width="50%">
-             <fieldset><legend><font  size=4> Pertencente à SEDUC</font></legend>
-              <table  border="1" width="100%">
-               <tr>
-                  <th  valign="top" align="left" bgcolor="gray"><font  size="2">Unidade</font></th>
-                  <th  valign="top" align="left" bgcolor="gray"><font  size="2">Nº</font></th>
-     
-               </tr>
-              <% for administracao in @administracaos %>
-              <tr>
-                 <td valign="top"align="left"><font  size="2"><%=h administracao.unidade.nome %></font></td>
-                 <td valign="top"><font  size="2"><%=h administracao.num_comp_seduc %></font></td>
-                 <%$totalC1= $totalC1 + administracao.num_comp_seduc%>
-              </tr>
-              <tr>
-                <td colspan="3">
-                <div class="botao">
-                  <table>
-                    <td><%= button_to('Exibir',{ :controller => "administracaos", :action => "show", :id =>administracao}, :method => "get") %></td>
-                 </table>
-               </div>
-               </td>
-              </tr>
-             <% end %>
-           <tr>
-            <td colspan="3" align="left"><font  size="2"><b> Total de Computadores: <%= $totalC1 %></b></font> </td>
-          </tr>
-
-           </table>
-          </filedset>
-         </td>
-         <td  valign="top" width="50%">
-             <fieldset><legend><font  size=4> Pertencente à Terceiros</font></legend>
-              <table  border="1" width="100%">
-                <%$totalC2 = 0%>
-               <tr>
-                  <th  valign="top" align="left" bgcolor="gray"><font  size="2">Unidade</font></th>
-                  <th  valign="top"align="left" bgcolor="gray"><font  size="2">Nº</font></th>
-
-               </tr>
-              <% for administracao in @administracaos %>
-              <tr>
-                 <td  valign="top"align="left"><font  size="2"><%=h administracao.unidade.nome %></font></td>
-                 <td valign="top"><font  size="2"><%=h administracao.num_comp %></font></td>
-                 <%$totalC2 = $totalC2 + administracao.num_comp%>
-              </tr>
-              <tr>
-                <td colspan="3">
-                <div class="botao">
-                  <table>
-                    <td><%= button_to('Exibir',{ :controller => "administracaos", :action => "show", :id =>administracao}, :method => "get") %></td>
-                 </table>
-               </div>
-               </td>
-              </tr>
-             <% end %>
-            <tr>
-              <td colspan="3" align="left"><font  size="2"><b> Total de Computadores: <%= $totalC2 %></b></font> </td>
-            </tr>
-
-           </table>
-          </filedset>
-         </td>
-
-        </table>
-     </fieldset>
-     </td>
-    </tr>
-    <tr>
-      <td colspan="3" align="left"><font  size="2"><b> TOTAL GERAL COMPUTADORES: <%= $totalC2 + $totalC1 + $totalC + $totals%></b></font> </td>
-    <tr
-   </table>
-   </fieldset>
-  </td>
-  </tr>
-  
- <tr>
-  <td>
-  <div class="botao">
+   <div class="botao">
    <table width="100%">
     <tr>
-       <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
-       <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
-       
+     <td align="left" width="6%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+     <td align="left" width="6%"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+
+      <td align="right">
+       <div class="botao">
+       <table>
+         <tr>
+            <% form_tag computadores_path, :method => 'get' do %>
+            <td align="right"><font size="4"> Unidade:</font>
+
+                <%= text_field_tag :search, params[:search] %>
+                <%= submit_tag "Filtrar", :nome => nil %>
+             <% end %>
+            </td>
+
+        </tr>
+      </table>
+     </div>
+     </td>
+     </tr>
+  </table>
+  <br/>
+  </div>
+   <table align="center" width="100%">
+
+    <tr>
+      <td valign="top" width="50%">
+        <fieldset><legend><font  size=5> Cadastrados</font></legend>
+         <table border="2" width="100%">
+          <tr><td>
+           <font  size="2">
+            <table border="2" width="100%">
+              <%$comp = 0%>
+              <% @computadores.each do |computadore| %>
+                <tr>
+                    <th bgcolor="gray">Unidade</th>
+                    <th bgcolor="gray">Tipo Controle</th>
+                    <th bgcolor="gray">Quantidade</th>
+                    <th bgcolor="gray">Configuração</th>
+                    <th bgcolor="gray">Usuário</th>
+                    <%if computadore.tipo_controle.nome == 'TERCEIROS'%>
+                      <th bgcolor="gray">Pertence</th>
+                      <th bgcolor="gray">Contato</th>
+                    <%else%>
+                        <th bgcolor="gray">Nº Patrimônio</th>
+                    <%end%>
+                </tr>
+                <tr>
+                    <td align="left"><%=h computadore.unidade.nome %></td>
+                    <td align="left"><%=h computadore.tipo_controle.nome %></td>
+                    <td align="center"><%=h computadore.quant %></td>
+                    <td align="left"><%=h computadore.config %></td>
+                    <td align="left"><%=h computadore.user %></td>
+                    <%if computadore.tipo_controle.nome == 'TERCEIROS'%>
+                      <td align="left"><%=h computadore.pertence %></td>
+                      <td align="left"><%=h computadore.contato %></td>
+                    <%else%>
+                       <td align="left"><%=h computadore.pat %></td>
+                    <%end%>
+               </tr>
+               <%$comp = $comp + computadore.quant%>
+               <tr>
+                <td colspan="7">
+                <div class="botao">
+                  <table>
+                    <td><%= button_to('Exibir',{:action => "show", :id =>computadore}, :method => "get") %></td>
+                    <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
+                       <td> <%= button_to('Editar',{:action => "edit", :id =>computadore}, :method => "get") %></td>
+                       <% if current_user.has_role?('administrador')%>
+                          <td><%= button_to('Excluir',{:action => "destroy", :id =>computadore}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+                       <%end%>
+                     <%end%>
+                  </table>
+                </div>
+               </td>
+            </tr>
+              <% end %>
+             <tr>
+               <td align="left"colspan="7"><font color="black">Total de Computadores Cadastrados  => <%=  $comp%></font></td>
+             </tr>
+
+            </table>
+           </font>
+
+          </td></tr>
+         </table>
+        </fieldset>
+      </td>
+     </table>
+   </fieldset>
+  </td>
+</table>
+ <div class="botao">
+   <table width="100%">
+    <tr>
+      <td width="6%" align="left"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
     </tr>
   </table>
   </div>
- </td>
- </tr>
- </table>
+<br/>
 
-
-  

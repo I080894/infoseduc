@@ -3,11 +3,11 @@
           <tr>
             <% form_for @search do |f| %>
               <tr>
-                <td align="right">
-                  <%= f.label :estagiario_id_equals, "Região" %>
-                  <%= f.collection_select :estagiario_id_equals, Estagiario.all, :id, :nome, :include_blank => true%>
+                <td align="right" width="95%"><font size="3">
+                  <%= f.label :estagiario_id_equals, "Estagiário:" %>
+                  <%= f.collection_select :estagiario_id_equals, @estagiarios, :id, :nome, :include_blank => true%></font>
                 </td>
-                <td align="center" colspan="2">
+                <td align="left">
                   <%= f.submit "Buscar" %>
                 </td>
               </tr>

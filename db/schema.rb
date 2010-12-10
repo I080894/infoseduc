@@ -9,25 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101104150801) do
+ActiveRecord::Schema.define(:version => 20101210112302) do
 
   create_table "administracaos", :force => true do |t|
-    t.integer  "unidade_id",                       :null => false
-    t.integer  "num_comp_seduc",    :default => 0
-    t.string   "config_comp_seduc"
-    t.integer  "num_imp_seduc",     :default => 0
-    t.string   "config_imp_seduc"
+    t.integer  "unidade_id",       :null => false
+    t.integer  "tipo_controle_id"
     t.string   "servidor"
     t.string   "rede"
     t.string   "internet"
-    t.integer  "num_comp",          :default => 0
-    t.string   "config_comp"
-    t.string   "pertence_comp"
-    t.string   "contato_comp"
-    t.integer  "num_imp",           :default => 0
-    t.string   "config_imp"
-    t.string   "pertence_imp"
-    t.string   "contato_imp"
     t.string   "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -42,11 +31,11 @@ ActiveRecord::Schema.define(:version => 20101104150801) do
     t.string   "problema"
     t.datetime "data_aten"
     t.integer  "estagiario_id"
-    t.integer  "tipo_problema_id"
+    t.integer  "tipos_problema_id"
     t.integer  "patrimonio"
     t.string   "local"
     t.string   "procedimentos"
-    t.integer  "situacao_chamado_id"
+    t.integer  "situacao_chamado_id", :default => 1
     t.datetime "data_enc"
     t.string   "obs"
     t.datetime "created_at"
@@ -59,8 +48,54 @@ ActiveRecord::Schema.define(:version => 20101104150801) do
     t.datetime "updated_at"
   end
 
+  create_table "computadores", :force => true do |t|
+    t.integer  "unidade_id"
+    t.integer  "tipo_controle_id"
+    t.integer  "quant"
+    t.string   "config"
+    t.string   "pat"
+    t.string   "user"
+    t.string   "pertence"
+    t.string   "contato"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "datashows", :force => true do |t|
+    t.integer  "unidade_id"
+    t.integer  "tipo_controle_id"
+    t.integer  "quant"
+    t.string   "config"
+    t.string   "pat"
+    t.string   "user"
+    t.string   "pertence"
+    t.string   "contato"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "departamentos", :force => true do |t|
+    t.integer  "unidade_id", :default => 53
     t.string   "depto"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "emfaltas", :force => true do |t|
+    t.integer  "componente_id"
+    t.string   "especifica"
+    t.integer  "quant"
+    t.string   "obs"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "emprestimos", :force => true do |t|
+    t.integer  "unidade_id"
+    t.datetime "emprestimo"
+    t.datetime "devolucao"
+    t.string   "responsavel"
+    t.string   "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -78,7 +113,8 @@ ActiveRecord::Schema.define(:version => 20101104150801) do
   end
 
   create_table "estagiarios", :force => true do |t|
-    t.integer  "unidade_id",                   :null => false
+    t.integer  "unidade_id"
+    t.integer  "regiao_id"
     t.string   "nome"
     t.string   "RG"
     t.string   "CPF"
@@ -136,23 +172,32 @@ ActiveRecord::Schema.define(:version => 20101104150801) do
     t.datetime "updated_at"
   end
 
-  create_table "itinerarios", :force => true do |t|
-    t.integer  "estagiario_id"
+  create_table "impressoras", :force => true do |t|
     t.integer  "unidade_id"
-    t.date     "data_visita"
+    t.integer  "tipo_controle_id"
+    t.integer  "quant"
+    t.string   "config"
+    t.string   "pat"
+    t.string   "user"
+    t.string   "pertence"
+    t.string   "contato"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "laboratorios", :force => true do |t|
-    t.integer  "unidade_id",  :null => false
-    t.integer  "num_comp"
-    t.string   "config_comp"
-    t.string   "servidor"
-    t.string   "rede"
-    t.string   "internet"
-    t.integer  "num_imp"
-    t.string   "config_imp"
+  create_table "itinerarios", :force => true do |t|
+    t.integer  "estagiario_id"
+    t.integer  "unidade_id"
+    t.date     "data_visita"
+    t.string   "obs"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "regiaos", :force => true do |t|
+    t.string   "regiao"
+    t.string   "local"
+    t.string   "unidade"
     t.string   "obs"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -194,22 +239,9 @@ ActiveRecord::Schema.define(:version => 20101104150801) do
     t.datetime "updated_at"
   end
 
-  create_table "seducs", :force => true do |t|
-    t.integer  "departamento_id", :null => false
-    t.string   "servidor"
-    t.string   "internet"
-    t.integer  "num_comp"
-    t.string   "computador"
-    t.integer  "num_imp"
-    t.string   "impressora"
-    t.string   "rede"
-    t.string   "obs"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "senhas", :force => true do |t|
     t.integer  "unidade_id", :null => false
+    t.string   "de"
     t.string   "usuario"
     t.string   "senha"
     t.string   "fone"
@@ -220,6 +252,12 @@ ActiveRecord::Schema.define(:version => 20101104150801) do
 
   create_table "situacao_chamados", :force => true do |t|
     t.string   "situacao"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tipo_controles", :force => true do |t|
+    t.string   "nome"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -237,7 +275,8 @@ ActiveRecord::Schema.define(:version => 20101104150801) do
   end
 
   create_table "unidades", :force => true do |t|
-    t.integer  "tipo_id",     :null => false
+    t.integer  "tipo_id",                    :null => false
+    t.integer  "regiao_id"
     t.string   "nome"
     t.string   "endereco"
     t.integer  "num"
@@ -249,6 +288,9 @@ ActiveRecord::Schema.define(:version => 20101104150801) do
     t.string   "diretor"
     t.string   "coordenador"
     t.string   "obs"
+    t.integer  "estagiarioM", :default => 0, :null => false
+    t.integer  "estagiarioV", :default => 0, :null => false
+    t.integer  "estagiarioE", :default => 0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

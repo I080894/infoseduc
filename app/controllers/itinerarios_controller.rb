@@ -1,11 +1,29 @@
 class ItinerariosController < ApplicationController
   # GET /itinerarios
   # GET /itinerarios.xml
+
+   before_filter :load_estagiarios
+  before_filter :load_unidades
+
+
+def load_unidades
+
+  @unidades = Unidade.find(:all, :order => "nome ASC")
+
+  end
+
+
+def load_estagiarios
+
+    @estagiarios = Estagiario.find(:all, :conditions =>  ["etinerante= 1 and desligado=0"], :order => 'nome ASC')
+  end
+
+
   def index
    @date = params[:month] ? Date.parse(params[:month]) : Date.today
    @search = Itinerario.search(params[:search])
    if (params[:search].blank?)
-      
+     
    else
       @itinerante = @search.all
       
@@ -47,7 +65,7 @@ class ItinerariosController < ApplicationController
 
     respond_to do |format|
       if @itinerario.save
-        flash[:notice] = 'Itinerario was successfully created.'
+        flash[:notice] = 'ITINERÁRIO SALVO COM SUCESSO.'
         format.html { redirect_to(@itinerario) }
         format.xml  { render :xml => @itinerario, :status => :created, :location => @itinerario }
       else
@@ -64,7 +82,7 @@ class ItinerariosController < ApplicationController
 
     respond_to do |format|
       if @itinerario.update_attributes(params[:itinerario])
-        flash[:notice] = 'Itinerario was successfully updated.'
+        flash[:notice] = 'ITINERÁRIO SALVO COM SUCESSO.'
         format.html { redirect_to(@itinerario) }
         format.xml  { head :ok }
       else

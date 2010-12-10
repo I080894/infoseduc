@@ -1,4 +1,4 @@
-<<br/>
+<br/>
 <table width="60%" align="center">
 <tr>
 <td>
@@ -12,7 +12,7 @@
      <fieldset><legend><font  size=4>ESTOQUE </font></legend>
        <table>
          <tr>
-            <td align="left"><b>Componente:</b></td>
+            <td align="left"><b>Produto:</b></td>
       
           </tr>
           <tr>
@@ -32,25 +32,26 @@
      </fieldset>
    </td>
   </tr>
+  <table>
+     <tr>
+          <td align="left" width="6%">
+            <font size="4" color="red">
+            <div id='Certeza'>
+              <%= f.submit "Salvar" %>
+            </div>
+            </font>
+          </td>
+          <%end%>
+         <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%>
+         </td>
+      </tr>
+    </table>
 </table>
 </font>
 </fieldset>
 </td>
 </tr>
 </table>
-<table  width="60%" align="center">
-  <tr>
-      <td align="left" width="6%">
-        <font size="4" color="red">
-        <div id='Certeza'>
-          <%= f.submit "Salvar" %>
-        </div>
-        </font>
-      </td>
-      <%end%>
-     <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%>
-     </td>
-  </tr>
-</table>
+<br/>
 
 

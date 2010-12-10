@@ -1,72 +1,14 @@
 <br/>
-<table align="center"width="50%">
-<tr>
-<td>
-<fieldset><legend><font  size=5> SENHAS</font></legend>
-<font  size="2">
- <table width="60%">
- <% form_for(@senhas) do |f| %>
- <%= f.error_messages %>
+ <table align="center"width="50%">
   <tr>
-   <td>
-     <table align="center">
-
-            <tr>
-               <td align="left"><b>Unidade:</b></td>
-                <td align="left"><%= f.collection_select :unidade_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- ' %>
-                    <%= observe_field 'senha_unidade_id',
-                   :with => :senha_unidade_id,
-                   :url => { :action => 'nome_unidade' } %>
-                 </td>
-            </tr>
-            <tr>
-                 <td colspan="2"align="left"><div id='unidade_nome'></div></td>
-           </tr>
-
-
-
-         <tr>
-           <td valign="top"align="left"><b>Usuário</b></td>
-           <td colspan="2" align="left"><%= f.text_field :usuario %></td>
-         </tr>
-        <tr>
-           <td valign="top"align="left"><b>Senha:</b></td>
-           <td colspan="2" align="left">    <%= f.text_field :senha %></td>
-         </tr>
-        <tr>
-           <td valign="top"align="left"><b>Fone Instalado:</b></td>
-           <td colspan="2" align="left">    <%= f.text_field :fone%></td>
-         </tr>
-         <tr>
-           <td valign="top"align="left"><b>Observações:</b></td>
-           <td colspan="2" align="left"><%= f.text_area(:obs, :cols =>"34", :rows => "3") %></td>
-         </tr>
-
-     </table>
+    <td>
+      <fieldset><legend><font  size=5> SENHAS</font></legend>
+         <%= render 'form' %>
+      </fieldset>
+    </td>
   </tr>
-
 </table>
-</font>
-</fieldset>
-</td>
-</tr>
-</table>
-
-<table  width="50%" align="center">
-   <tr>
-      <td align="left" width="6%">
-        <font size="4" color="red">
-        <div id='Certeza'>
-            <%= f.submit "Salvar" %>
-        </div>
-        </font>
-      </td>
-<%end%>
-
-    <td align="left" ><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
-   </tr>
-
-</table>
+<br/>
 
 
 

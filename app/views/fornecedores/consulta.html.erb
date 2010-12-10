@@ -5,14 +5,13 @@
    <br/>
    <font color="white" size="2">
    <div class="botao">
-   <table width="100%">
+   <table width="100%" >
     <tr>
-      <td align="left" width="8%"><%= button_to 'Cadastrar', new_fornecedore_path %></td>
-      <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
-      <td align="left" width="8%" ><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+      <td align="left" width="6%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      <td align="left" width="6%" ><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
       <div class="botao">
        <% form_tag consulta_path, :method => 'get' do %>
-        <td align="rigth"><font size="4"> Tipo Serviço:</font>
+        <td align="right"><font size="4"> Tipo serviço:</font>
            <%= text_field_tag :search, params[:search] %>
            <%= submit_tag "Filtrar", :tipo_servico => nil %>
         </td>
@@ -64,11 +63,12 @@
 <div class="botao">
    <table width="100%" align="center">
     <tr>
-      <td align="left" width="8%"><%= button_to 'Cadastrar', new_fornecedore_path %></td>
-      <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      
+      <td align="left" width="6%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
       <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
 
     </tr>
   </table>
   </div>
+  <br/>
 

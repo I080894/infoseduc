@@ -1,0 +1,77 @@
+<br/>
+ <table  align="center" width="50%">
+  <tr>
+  <td>
+  <fieldset><legend><font  size=5> DATASHOW</font></legend>
+  <div class="botao">
+   <table width="100%">
+    <tr>
+       <td width="6%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+       <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+
+    </tr>
+  </table>
+  </div>
+   <table align="center" width="100%">
+    <tr>
+      <td valign="top" width="20%">
+        <fieldset><legend><font  size=5> Cadastrados</font></legend>
+         <br/>
+         <table border="1" width="100%">
+         <%$totals = 0%>
+          <tr>
+             <th  valign="top" align="left" bgcolor="gray"><font  size="2">Unidade</font></th>
+             <th  valign="top" align="center" bgcolor="gray"><font  size="2">Configuração</font></th>
+             <th  valign="top" align="center" bgcolor="gray"><font  size="2">Nº</font></th>
+          </tr>
+          
+          <% for data in @datashows %>
+          
+          <tr>
+
+             <td  valign="top"align="left"><font  size="2"><%=h data.unidade.nome %></font></td>
+             <td  valign="top"><font  size="2"><%=h data.config %></font></td>
+             <td  valign="top"><font  size="2"><%=h data.quant %></font></td>
+             <%$totals= $totals + data.quant%>
+
+
+          </tr>
+
+          <tr>
+            <td colspan="12">
+             <div class="botao">
+              <table>
+               <td><%= button_to('Exibir',{:controller => "datashows",:action => "show", :id =>data}, :method => "get") %></td>
+              </table>
+             </div>
+           </td>
+          </tr>
+         <% end %>
+
+         <tr>
+            <td colspan="3" align="left"><font  size="2"><b> Total => <%= $totals %></b></font> </td>
+          </tr>
+        </table>
+       </fieldset>
+      </td>
+   </table>
+   </fieldset>
+  </td>
+  </tr>
+ <tr>
+  <td>
+  <div class="botao">
+   <table width="100%">
+    <tr>
+       <td width="6%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+       <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+
+    </tr>
+  </table>
+  </div>
+ </td>
+ </tr>
+ </table>
+ <br/>
+
+

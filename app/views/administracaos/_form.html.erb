@@ -1,0 +1,51 @@
+<% form_for(@administracaos) do |f| %>
+<%= f.error_messages %>
+<font  size="2">
+<table width="100%"  >
+  <tr>
+   <td>
+     <table>
+        <tr>
+           <td width="10%"align="left" ><b>Unidade:</b></td>
+           <td width="20%"align="left"> <%= f.collection_select :unidade_id, @unidades, :id, :nome, :include_blank => ' -- Selecione -- ' %>
+        </tr>
+        <tr>
+           <td width="10%"align="left" ><b>Pertence:</b></td>
+           <td width="20%"align="left"> <%= f.collection_select :tipo_controle_id, @tipo_controles, :id, :nome, :include_blank => ' -- Selecione -- ' %>
+        </tr>
+         <tr>
+            <td align="left"><b> Servidor:</b></td>
+            <td align="left"><%= f.text_field :servidor, :size=>46 %></td>
+         </tr>
+         <tr>
+            <td align="left"><b> Rede:</b></td>
+            <td align="left"><%= f.text_field :rede, :size=>46 %></td>
+         </tr>
+         <tr>
+            <td align="left"><b> Internet:</b></td>
+            <td align="left"><%= f.text_field :internet, :size=>46 %></td>
+         </tr>
+         <tr>
+           <td align="left"><b>Observações</b></td>
+           <td align="left"><%= f.text_area(:obs, :cols =>58, :rows => "2") %></td>
+
+         </tr>
+         <table  width="100%" align="center">
+            <tr>
+                <td align="left" width="6%">
+                  <font size="4" color="red">
+                  <div id='Certeza'>
+                    <%= f.submit "salvar" %>
+                  </div>
+                  </font>
+                </td>
+                <%end%>
+               <td align="left"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+             </tr>
+          </table>
+     </table>
+    </td>
+   </tr>
+ </table>
+ </font>
+

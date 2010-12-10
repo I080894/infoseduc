@@ -9,8 +9,8 @@
 <font  size="2">
 <table width="100%">
   <tr>
-    <td width="30%" align="left"><b>Componente:</b></td>
-    <td align="left"><%=h @saidas.estoque.nome %></td>
+    <td width="30%" align="left"><b>Produto:</b></td>
+    <td align="left"><%=h @saidas.componente.nome %></td>
   </tr>
   <tr>
      <td align="left"><b>Especificação:</b></td>
@@ -44,6 +44,16 @@
     <td align="left"><b> Data Alteração:</b></td>
     <td align="left"> <%=h @saidas.updated_at.strftime("%d de %B de %Y")  %>
   </tr>
+   <div class="botao">
+     <table>
+      <tr>
+       <td align="left" width="6%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+       <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+      </tr>
+    </table>
+   </div>
+
+
 
  </table>
  </font>
@@ -52,13 +62,5 @@
 </td>
 </tr>
 </table>
- <div class="botao">
-   <table width="50%" align="center">
-    <tr>
-     <td align="left" width="8%"><%= button_to 'Voltar', saidas_path, {:method => "get"} %></td>
-     <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
-    </tr>
-  </table>
-
- </div>
+<br/>
 

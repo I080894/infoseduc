@@ -14,7 +14,7 @@ class CreateRoles < ActiveRecord::Migration
     Role.create :name => "administrador"
     Role.create :name => "estagiario unidade"
     Role.create :name => "estagiario SEDUC"
-    Role.create :name => "estagiario etinerante"
+    Role.create :name => "estagiario itinerante"
    
     RolesUser.create :role_id => 1, :user_id => 1
 

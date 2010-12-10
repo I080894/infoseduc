@@ -4,7 +4,6 @@ class TiposController < ApplicationController
   
   def index
     @tipos = Tipo.find(:all)
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @tipos }
@@ -15,7 +14,6 @@ class TiposController < ApplicationController
   # GET /tipos/1.xml
   def show
     @tipos = Tipo.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @tipos }
@@ -26,7 +24,6 @@ class TiposController < ApplicationController
   # GET /tipos/new.xml
   def new
     @tipos = Tipo.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @tipos }
@@ -42,8 +39,7 @@ class TiposController < ApplicationController
   # POST /tipos.xml
   def create
     @tipos = Tipo.new(params[:tipo])
-
-    respond_to do |format|
+     respond_to do |format|
       if @tipos.save
         flash[:notice] = 'CADASTRADO COM SUCESSO.'
         format.html { redirect_to(new_tipo_path) }
@@ -53,7 +49,7 @@ class TiposController < ApplicationController
         format.xml  { render :xml => @tipos.errors, :status => :unprocessable_entity }
       end
     end
-  end
+ end
 
   # PUT /tipos/1
   # PUT /tipos/1.xml

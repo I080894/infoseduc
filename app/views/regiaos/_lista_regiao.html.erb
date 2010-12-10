@@ -1,0 +1,16 @@
+<br/>
+<font size="3">
+<table  width="100%">
+<% for reg in @regiaos %>
+  <tr>
+    <th width="20%">Região:</th>
+    <th><%=h reg.regiao %></th>
+      <div class="botao">
+         <th align="right" width="6%"><%= button_to('Excluir',{:action => "destroy", :id =>reg}, :confirm => 'Confirma exclusão?', :method => "delete")%></th>
+         <th align="right"width="6%"> <%= button_to('Exibir',{:action => "show", :id =>reg}, :method => "get") %></th>
+      </div>
+    
+<% end %>
+</table>
+
+</font>

@@ -1,5 +1,10 @@
-<% for unidade in  @estagariounidade %>
-      -  <b><%=h unidade.nome %></b>
+
+<% for uni in  @estagariounidade %>
+      <%if uni.regiao_id.nil?%>
+        ------
+      <%else%>
+        -  <b><%=h uni.regiao.regiao %></b>
+      <%end%>
    <% end %>
 
 

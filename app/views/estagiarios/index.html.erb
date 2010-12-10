@@ -6,10 +6,7 @@
    <div class="botao">
    <table width="100%">
     <tr>
-     <% if current_user.has_role?('administrador') %>
-       <td width="8%" align="left"><%= button_to 'Cadastrar', new_estagiario_path %></td>
-     <%end%>
-     <td width="8%" align="left"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+      <td width="8%" align="left"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
       <td width="8%" align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
       <% if  $var == 0 then %>
          <td align="left" colspan="4"><%= will_paginate @estagiarios %></td>
@@ -19,7 +16,7 @@
          <table>
         <tr>
         <% form_tag estagiarios_path, :method => 'get' do %>
-        <td align="right"><font size="4"> Digite Nome:</font>
+        <td align="right"><font size="4"> Digite nome:</font>
            <%= text_field_tag :search, params[:search] %>
            <%= submit_tag "Filtrar", :name => nil %>
         </td>
@@ -46,6 +43,7 @@
        <th bgcolor="gray">Unidade</th>
        <th bgcolor="gray">Período</th>
 
+
     </tr>
 
     <tr>
@@ -54,8 +52,12 @@
        <td><%=h estagiarios.cel %></td>
        <td><%=h estagiarios.email %></td>
        <td><%=h estagiarios.periodo_est %></td>
-       <td><%=h estagiarios.unidade.nome %></td>
-       <td><%=h estagiarios.periodo_trab %></td>
+       <%if estagiarios.unidade_id.nil?%>
+             <td><%=h estagiarios.regiao.regiao %></td>
+       <%else%>
+             <td><%=h estagiarios.unidade.nome %></td>
+       <%end%>
+        <td><%=h estagiarios.periodo_trab %></td>
     </tr>
     <tr>
       <td colspan="12">
@@ -80,9 +82,6 @@
   <div class="botao">
    <table width="100%" align="center">
     <tr>
-      <% if current_user.has_role?('administrador')  %>
-        <td width="8%"><%= button_to 'Cadastrar', new_estagiario_path %></td>
-      <%end%>
       <td width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
       <td width="8"align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
       <% if  $var == 0 then %>
@@ -92,10 +91,4 @@
     </tr>
   </table>
   </div>
-
-
-
-
-
-
-
+  <br/>

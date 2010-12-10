@@ -4,7 +4,8 @@ class CreateItinerarios < ActiveRecord::Migration
       t.references :estagiario
       t.references :unidade
       t.date :data_visita
-
+      t.string :obs
+      
       t.timestamps
     end
   end

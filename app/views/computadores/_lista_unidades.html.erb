@@ -1,0 +1,69 @@
+
+ <table  align="center" width="100%">
+  <td>
+  <fieldset><legend><font  size=5> Cadastrados</font></legend>
+   <br/>
+   <div class="botao">
+   <table width="100%">
+    <tr>
+      <td align="left" width="6%"><%= button_to 'Voltar', homes_path, {:method => "get"}%></td>
+     <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+   </tr>
+  </table>
+  <br/>
+  </div>
+    <font  size="2">
+    <table border="2" width="100%">
+      <%$comp = 0%>
+     <% for comp in @computadores %>
+      <tr>
+        <th bgcolor="gray">Unidade</th>
+         <th bgcolor="gray">Tipo Controle</th>
+        <th bgcolor="gray">Quantidade</th>
+        <th bgcolor="gray">Configuração</th>
+        <th bgcolor="gray">Usuário</th>
+        <%if comp.tipo_controle.nome == 'TERCEIROS'%>
+          <th bgcolor="gray">Pertence</th>
+          <th bgcolor="gray">Contato</th>
+        <%else%>
+          <th bgcolor="gray">Nº Patrimônio</th>
+        <%end%>
+      </tr>
+      <tr>
+       <td><%=h comp.unidade.nome %></td>
+       <td><%=h comp.tipo_controle.nome %></td>
+       <td><%=h comp.quant %></td>
+       <td><%=h comp.config %></td>
+       <td><%=h comp.user %></td>
+       <%if comp.tipo_controle.nome == 'TERCEIROS'%>
+         <td><%=h comp.pertence %></td>
+         <td><%=h comp.contato %></td>
+       <%else%>
+         <td align="left"><%=h comp.pat %></td>
+        <%end%>
+     </tr>
+       <%$comp = $comp + comp.quant%>
+    <tr>
+      <td colspan="7">
+        <div class="botao">
+        <table>
+           <td><%= button_to('Exibir',{:action => "show", :id =>comp}, :method => "get") %></td>
+          <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
+            <td> <%= button_to('Editar',{:action => "edit", :id =>comp}, :method => "get") %></td>
+            <% if current_user.has_role?('administrador')%>
+               <td><%= button_to('Excluir',{:action => "destroy", :id =>comp}, :confirm => 'Confirma exclusão?', :method => "delete")%></td>
+            <%end%>
+          <%end%>
+        </table>
+        </div>
+       </td>
+    </tr>
+    <% end %>
+    <tr>
+       <td align="left"colspan="7"><font color="black">Total de Computadores  => <%=  $comp%></font></td>
+    </tr>
+   </table>
+   </font>
+  </fieldset>
+  </table>
+

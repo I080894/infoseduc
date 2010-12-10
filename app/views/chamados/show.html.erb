@@ -1,111 +1,43 @@
 <br/>
-<br/>
-<table width="80%"align="center">
-<tr>
-<td>
-<fieldset><legend><font  size=5> ORDEM DE SERVIÇO</font></legend>
-<font  size="2">
-<table width="100%">
-  <tr>
-    <td width="50%"  valign="top">
-     <fieldset><legend><font  size=4> Solicitação</font></legend>
-     <table>
-       <tr>
-         <td align="left"><b>Data Solcitação:</b></td>
-         <td align="left"><%=h @chamados.data_sol.strftime("%d de %B de %Y") %></td>
-       </tr>
-       <tr>
-         <td align="left"><b>Solicitante</b></td>
-         <td align="left"><%=h @chamados.solicitante %></td>
-       </tr>
-       <tr>
-         <td align="left"><b>Unidade:</b></td>
-         <td align="left"> <%=h @chamados.unidade.nome %></td>
-       </tr>
-       <tr>
-         <td align="left"><b>Departamento:</b></td>
-         <td align="left"><%=h @chamados.depto %></td>
-       </tr>
-       <tr>
-         <td align="left"><b>Forma Solicitação::</b></td>
-         <td align="left"><%=h @chamados.forma_sol %></td>
-       </tr>
-       <tr>
-         <td align="left"><b>Descrição Problema:</b></td>
-         <td align="left"><%=h @chamados.problema %></td>
-       </tr>
-       <tr>
-         <td align="left"><b>Observação:</b></td>
-         <td align="left"><%=h @chamados.obs%></td>
-       </tr>
-     </table>
-    </fieldset>
-   </td>
-   <td width="50%" valign="top">
-    <table width="100%">
-      <tr valign="top">
+<table width="50%"align="center">
+ <tr>
+  <td>
+   <fieldset><legend><font  size=5> ORDEM DE SERVIÇO</font></legend>
+    <font  size="2">
+     <table width="100%">
+      <tr> 
         <td>
-          <fieldset><legend><font  size=4> Atendimento</font></legend>
-          <table>
-            <tr>
-             <td align="left"><b>Nº Ordem:</b></td>
-             <td align="left"><%=h @chamados.id %></td>
-            </tr>
-
-            <tr>
-             <td align="left"><b>Data Atendimento:</b></td>
-             <td align="left"><%=h @chamados.data_aten.strftime("%d de %B de %Y") %></td>
-            </tr>
-            <tr>
-             <td align="left"><b>Funcinário:</b></td>
-             <td align="left"> <%=h @chamados.estagiario.nome %>
-             </td>
-           </tr>
-           <tr>
-             <td align="left"><b>Tipo Problema:</b></td>
-             <td align="left"><%=h @chamados.tipos_problema.tipo %></td>
+          <%= render 'formshow' %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <font><b>
+            >> ESTA ORDEM DE SERVIÇO SERÁ ATENDIDA ASSIM QUE POSSÍVEL<br/>
+            >> QUALQUER DÚVIDA ENTRAR EM CONTARO COM A INFORMÁTICA- SEDUC
+          </b></font>
+         </td>
+      </tr>
+       <div class="botao">
+         <table width="50%" align="left">
+          <tr>
+           <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+           <% if current_user.has_role?('administrador') %>
+              <td align="left" width="8%"> <%= button_to('Editar', {:action => "edit", :id => @chamados}, :method => "get") %></td>
+              <td align="left" width="8%"> <%= button_to 'Cadastrar', new_chamado_path %></td>
+          <%end%>
+           <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
           </tr>
-          <tr>
-            <td align="left"><b>Patrimônio</b></td>
-            <td align="left"><%=h @chamados.patrimonio %></td>
-         </tr>
-         <tr>
-            <td align="left"><b>Local Atendimento</b></td>
-            <td align="left"><%=h @chamados.local%></td>
-         </tr>
-          <tr>
-            <td align="left"><b>Procedimentos Executados:</b></td>
-            <td align="left"><%=h @chamados.procedimentos %></td>
-         </tr>
-          <tr>
-            <td align="left"><b>Situação Chamado:</b></td>
-            <td align="left"><%=h @chamados.situacao_chamado.situacao %></td>
-         </tr>
         </table>
-        </fieldset>
-        </td
-       </tr>
-      </table>
-      </td>
-     </tr>
-    </table>
+       </div>
+
+     </table>
    </font>
   </fieldset>
-</td>
-</tr>
+ </td>
+ </tr>
+</table>
+<br/>
 
- </table>
- <div class="botao">
-   <table width="80%" align="center">
-    <tr>
-     <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
-     <% if current_user.has_role?('administrador') %>
-        <td align="left" width="8%"> <%= button_to('Editar', {:action => "edit", :id => @chamados}, :method => "get") %></td>
-        <td align="left" width="8%"> <%= button_to 'Cadastrar', new_chamado_path %></td>
-    <%end%>
-     <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
-    </tr>
-  </table>
 
- </div>
 

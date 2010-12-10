@@ -63,18 +63,36 @@
         <th bgcolor="gray">Obs</th>
     </tr>
      <tr>
-        <td><%=h estagiarios.unidade.nome %></td>
+        <%if estagiarios.unidade_id.nil?%>
+           <%=h estagiarios.regiao.regiao %>
+         <%else%>
+           <%=h estagiarios.unidade.nome %>
+        <%end%>
         <td><%=h estagiarios.periodo_trab %></td>
         <td><%=h estagiarios.responsavel %></td>
-        <td><%=h estagiarios.data_admissao.strftime("%d/%m/%Y") %></td>
-        <td><%=h estagiarios.data_desliga.strftime("%d/%m/%Y") %></td>
-        
+        <% if estagiarios.data_admissao.nil? then %>
+           <td><%=h estagiarios.data_admissao("%d/%m/%Y") %></td>
+        <%else%>
+           <td><%=h estagiarios.data_admissao.strftime("%d/%m/%Y") %></td>
+        <%end%>
+
+
+        <% if estagiarios.desligado == 1 %>
+
+
+              <% if estagiarios.data_desliga.nil? then %>
+                 <td><%=h estagiarios.data_desliga("%d/%m/%Y") %></td>
+              <%else%>
+                 <td><%=h estagiarios.data_desliga.strftime("%d/%m/%Y") %></td>
+              <%end%>
+
+         <%else%>
+              EM ATIVIDADE
+          <%end%>
+          </tr>
+
         <td><%=h estagiarios.obs %></td>
     </tr>
-
-
-
-
     <tr>
       <td colspan="12">
         <div class="botao">

@@ -1,11 +1,10 @@
 <br/>
 <br/>
+<%if @estagiarios.flag == 0%>
 <table width="80%"align="center">
 <tr>
 <td>
 <fieldset><legend><font  size=5> ESTAGIÁRIOS</font></legend>
-<% form_for(@estagiarios) do |f| %>
-<%= f.error_messages %>
 <font  size="2">
 <table width="100%">
   <tr>
@@ -87,20 +86,27 @@
           </tr>
           <tr>
             <td align="left"><b>Término:</b></td>
-            <td align="left"><%=h @estagiarios.data_termino.strftime("%d de %B de %Y") %></td>
-         </tr>
+                <% if @estagiarios.data_termino.nil? then %>
+                    <td align="left"><%=h @estagiarios.data_termino %></td>
+                <%else%>
+                    <td align="left"><%=h @estagiarios.data_termino.strftime("%d/%m/%y") %></td>
+                <%end%>
+                </tr>
         </table>
         </fieldset>
         </td
        </tr>
-
        <tr>
         <td>
          <fieldset><legend><font  size=4> Dados Contrato</font></legend>
          <table>
            <tr>
-               <td align="left"><b>Unidade:</b></td>
-                <td align="left"><%=h @estagiarios.unidade.nome %></td>
+               <td align="left" width="10%"><b>Unidade:</b></td>
+                <%if @estagiarios.unidade_id.nil?%>
+                  <td align="left"><%=h @estagiarios.regiao.regiao %></td>
+                <%else%>
+                  <td align="left"><%=h @estagiarios.unidade.nome %></td>
+                <%end%>
            </tr>
            <tr>
               <td align="left"><b>Periodo:</b></td>
@@ -117,9 +123,13 @@
               <td colspan="2" align="left"><b>Estagiário EM ATIVIDADE</b></td>
               <%end%>
           </tr>
-           <tr>
+          <tr>
              <td align="left"><b>Desligamento:</b></td>
-             <td align="left"><%=h @estagiarios.data_desliga.strftime("%d de %B de %Y") %></td>
+                 <% if @estagiarios.data_desliga.nil? then %>
+                    <td align="left"><%=h @estagiarios.data_desliga %></td>
+                <%else%>
+                    <td align="left"><%=h @estagiarios.data_desliga.strftime("%d/%m/%y") %></td>
+                <%end%>
            </tr>
            <tr>
             <td align="left"><b> Aval</b></td>
@@ -138,26 +148,108 @@
      </table>
     </td>
    </tr>
-  </table>
- </font>
- <%end%>
- </fieldset>
-</td>
-</tr>
-</table>
- <div class="botao">
-   <table width="80%" align="center">
+   <div class="botao">
+   <table>
     <tr>
-     <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
-     <% if current_user.has_role?('administrador') %>
-        <td align="left" width="8%"> <%= button_to('Editar', {:action => "edit", :id => @estagiarios}, :method => "get") %></td>
-        <td align="left" width="8%"> <%= button_to 'Cadastrar', new_estagiario_path %></td>
-    <%end%>
+      <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+      <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
+       <td align="left" width="8%"> <%= button_to('Editar', {:action => "edit", :id => @unidades}, :method => "get") %></td>
+     <%end%>
      <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
     </tr>
   </table>
+  </div>
+   </table>
+ </font>
+ </fieldset>
+ <%else%>
+<table width="60%"align="center">
+<tr>
+<td>
+<fieldset><legend><font  size=5> ANALISTAS</font></legend>
+<font  size="2">
+<table width="100%">
+  <tr>
+    <td width="50%"  valign="top">
+     <fieldset><legend><font  size=4> Dados Pessais</font></legend>
+     <table>
+       <tr>
+         <td align="left"><b>Nome:</b></td>
+         <td align="left"><%=h @estagiarios.nome %></td>
+       </tr>
+       <tr>
+         <td align="left"><b>RG:</b></td>
+         <td align="left"><%=h @estagiarios.RG %>
+             <font size="0.2">.......</font>
+             <b> CPF</b>
+              <%=h @estagiarios.CPF %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Endereço:</b></td>
+         <td align="left"> <%=h @estagiarios.endereco %>
+             <b>Nº: </b>
+             <%=h @estagiarios.num %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Complemento:</b></td>
+         <td align="left"><%=h @estagiarios.complemento %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Bairro:</b></td>
+         <td align="left"><%=h @estagiarios.bairro %></td>
+       </tr>
+       <tr>
+         <td align="left"><b> Cidade:</b></td>
+         <td align="left"><%=h @estagiarios.cidade %></td>
+       </tr>
+       <tr>
+         <td align="left"><b>Telefone:</b></td>
+         <td align="left"><%=h @estagiarios.fone %>
+             <font size="0.2">.......</font>
+             <b> Celular:</b>
+             <%=h @estagiarios.cel %></td>
+       </tr>
+       <tr>s
+         <td align="left"><b> e_mail:</b></td>
+         <td align="left"><%=h @estagiarios.email %></td>
+       </tr>
 
- </div>
+       <tr>
+         <td align="left"><b>Data Nasc:</b></td>
+         <td align="left">  <%=h @estagiarios.data_nasc.strftime("%d de %B de %Y") %></td><p>
+       </tr>
+        <tr>
+        <td valign="top" align="left"><b>Observações:</b></td>
+        <td align="left">  <%=h @estagiarios.obs %></td>
+       </tr>
+     </table>
+    </fieldset>
+   </td>
+   </tr>
+   <div class="botao">
+   <table>
+    <tr>
+      <td align="left" width="8%"><%= button_to 'Voltar', homes_path, {:method => "get"} %></td>
+      <% if current_user.has_role?('administrador') or current_user.has_role?('estagiario SEDUC') %>
+       <td align="left" width="8%"> <%= button_to('Editar', {:action => "edit", :id => @estagiarios}, :method => "get") %></td>
+      <%end%>
+     <td align="left"><input type="Button" Value="Imprimir" onclick="javascript:window.print()"></td>
+    </tr>
+  </table>
+  </div>
+   </table>
+ </font>
+ </fieldset>
+ </td>
+ </tr>
+ </table>
+<%end%>
+
+
+</td>
+</tr>
+</table>
+<br/>
 
 
 

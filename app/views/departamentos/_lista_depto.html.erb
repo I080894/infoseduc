@@ -6,7 +6,9 @@
     <th width="20%">Departamento:</th>
     <th><%=h departamentos.depto %></th>
       <div class="botao">
+        <% if current_user.has_role?('administrador')%>
          <th align="right"><%= button_to('Excluir',{:action => "destroy", :id =>departamentos}, :confirm => 'Confirma exclusão?', :method => "delete")%></th>
+        <%end%>
       </div>
     
 <% end %>
